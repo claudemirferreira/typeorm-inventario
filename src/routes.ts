@@ -2,6 +2,7 @@ import {InventarioController} from "./controller/InventarioController";
 import { ContagemController } from "./controller/ContagemController";
 import { ItemController } from "./controller/ItemController";
 import { LancamentoController } from "./controller/LancamentoController";
+import { ItemXlsController } from "./controller/ItemXlsController";
 
 export const Routes = [
     //inventario
@@ -94,5 +95,34 @@ export const Routes = [
         route: "/lancamento/:id",
         controller: LancamentoController,
         action: "remove"
+    },
+
+    //import
+    {
+        method: "get",
+        route: "/item-import",
+        controller: ItemXlsController,
+        action: "all"
+    }, {
+        method: "get",
+        route: "/item-import/:id",
+        controller: ItemXlsController,
+        action: "one"
+    }, {
+        method: "post",
+        route: "/item-import",
+        controller: ItemXlsController,
+        action: "save"
+    }, {
+        method: "post",
+        route: "/item-import/all",
+        controller: ItemXlsController,
+        action: "save"
+    }, {
+        method: "delete",
+        route: "/item-import/:id",
+        controller: ItemXlsController,
+        action: "remove"
     }
+
 ];

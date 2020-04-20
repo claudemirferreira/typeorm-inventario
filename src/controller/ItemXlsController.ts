@@ -1,10 +1,10 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
-import { Item } from "../entity/item";
+import { ItemXls } from "../entity/item-xls";
 
-export class ItemController {
+export class ItemXlsController {
 
-    private repository = getRepository(Item);
+    private repository = getRepository(ItemXls);
 
     async all(request: Request, response: Response, next: NextFunction) {
         return this.repository.find();
@@ -15,6 +15,21 @@ export class ItemController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
+        return this.repository.save(request.body);
+    }
+
+    //import todos os itens
+    async saveAll(request: Request, response: Response, next: NextFunction) {
+        /*
+        console.log(JSON.stringify(request.body));
+        var data = request.body;
+
+        data.forEach(function (item) {
+            console.log(item.codigo);
+            console.log(item.nome);
+        });        
+        */
+
         return this.repository.save(request.body);
     }
 

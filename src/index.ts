@@ -12,6 +12,9 @@ createConnection().then(async connection => {
 
     // create express app
     const app = express();
+    var cors = require('cors');
+
+    app.use(cors());
     app.use(bodyParser.json());
 
     // register express routes from defined application routes
@@ -41,7 +44,6 @@ createConnection().then(async connection => {
         email: "admin@gmail.com",
         senha: "senha",
     }));
-    */
 
    await connection.manager.save(connection.manager.create(Item, {
         nome: "Administrador",
@@ -51,12 +53,12 @@ createConnection().then(async connection => {
         quantidadeFisica: 10,
     }));
 
-
    await connection.manager.save(connection.manager.create(Inventario, {
         data: new Date(),
         nome: "Administrador",
         status: "1",
-    }));    
+    }));
+    */   
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
 
