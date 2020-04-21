@@ -1,28 +1,27 @@
 import {Entity, Column, PrimaryGeneratedColumn, JoinTable, ManyToMany, OneToMany} from "typeorm";
-import { Contagem } from "./contagem";
 
-@Entity()
+@Entity({name:"inv_item_xls"})
 export class ItemXls {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({name:"item_xls_id"})
     id: number;
 
-    @Column()
+    @Column({length:200, nullable:false})
     nome: string;
 
-    @Column()
+    @Column({length:20, nullable:false})
     codigo: string;
 
-    @Column()
+    @Column({length:6, nullable:false})
     unidade: string;
 
-    @Column()
+    @Column({length:50, nullable:false})
     endereco: string;
 
-    @Column()
+    @Column({length:60, nullable:false})
     boleto: string;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 20, scale: 2, nullable:false})
     quantidade: number;
 
 }

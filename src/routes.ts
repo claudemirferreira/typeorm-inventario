@@ -3,6 +3,7 @@ import { ContagemController } from "./controller/ContagemController";
 import { ItemController } from "./controller/ItemController";
 import { LancamentoController } from "./controller/LancamentoController";
 import { ItemXlsController } from "./controller/ItemXlsController";
+import { EnderecoController } from "./controller/EnderecoController";
 
 export const Routes = [
     //inventario
@@ -72,7 +73,37 @@ export const Routes = [
         route: "/item/:id",
         controller: ItemController,
         action: "remove"
-    },
+
+
+
+    //endereco
+    }, {
+        method: "get",
+        route: "/endereco",
+        controller: EnderecoController,
+        action: "all"
+    }, {
+        method: "get",
+        route: "/endereco/:id",
+        controller: EnderecoController,
+        action: "one"
+    }, {
+        method: "post",
+        route: "/endereco",
+        controller: EnderecoController,
+        action: "save"
+    }, {
+        method: "delete",
+        route: "/endereco/:id",
+        controller: EnderecoController,
+        action: "remove"
+
+    }, {// http://localhost:3000/item/import-all
+       method: "get",
+        route: "/item/import",
+        controller: ItemController,
+        action: "import"
+    },    
 
     //lancamento
     {

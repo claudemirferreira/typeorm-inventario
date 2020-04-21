@@ -21,6 +21,7 @@ createConnection().then(async connection => {
     Routes.forEach(route => {
         (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
             const result = (new (route.controller as any))[route.action](req, res, next);
+
             if (result instanceof Promise) {
                 result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
 
@@ -52,13 +53,13 @@ createConnection().then(async connection => {
         quantidadeSistema: 10,
         quantidadeFisica: 10,
     }));
+    */   
 
    await connection.manager.save(connection.manager.create(Inventario, {
         data: new Date(),
         nome: "Administrador",
         status: "1",
     }));
-    */   
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
 

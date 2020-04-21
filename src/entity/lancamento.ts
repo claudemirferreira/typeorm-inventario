@@ -1,7 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from "typeorm";
 import { Contagem } from "./contagem";
 
-@Entity()
+@Entity({name:"inv_lancamento"})
 export class Lancamento {
 
     @PrimaryGeneratedColumn({name:"lanc_id"})
