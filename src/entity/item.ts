@@ -4,10 +4,7 @@ import { Endereco } from "./endereco";
 @Entity({name:"inv_item"})
 export class Item {
 
-
-    @Column({length:20, nullable:false})
-    @Index({ unique: true })
-    @PrimaryColumn({name:"codigo"})
+    @PrimaryColumn({ length:20})
     codigo: string;
 
     @Column({length:200, nullable:false})

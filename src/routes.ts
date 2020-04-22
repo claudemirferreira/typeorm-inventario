@@ -1,7 +1,6 @@
 import {InventarioController} from "./controller/InventarioController";
 import { ContagemController } from "./controller/ContagemController";
 import { ItemController } from "./controller/ItemController";
-import { LancamentoController } from "./controller/LancamentoController";
 import { ItemXlsController } from "./controller/ItemXlsController";
 import { EnderecoController } from "./controller/EnderecoController";
 
@@ -73,11 +72,11 @@ export const Routes = [
         route: "/item/:id",
         controller: ItemController,
         action: "remove"
-
+    },
 
 
     //endereco
-    }, {
+    {
         method: "get",
         route: "/endereco",
         controller: EnderecoController,
@@ -103,30 +102,7 @@ export const Routes = [
         route: "/item/import",
         controller: ItemController,
         action: "import"
-    },    
-
-    //lancamento
-    {
-        method: "get",
-        route: "/lancamento",
-        controller: LancamentoController,
-        action: "all"
-    }, {
-        method: "get",
-        route: "/lancamento/:id",
-        controller: LancamentoController,
-        action: "one"
-    }, {
-        method: "post",
-        route: "/lancamento",
-        controller: LancamentoController,
-        action: "save"
-    }, {
-        method: "delete",
-        route: "/lancamento/:id",
-        controller: LancamentoController,
-        action: "remove"
-    },
+    },   
 
     //import
     {

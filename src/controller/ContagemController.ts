@@ -1,13 +1,42 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import { Contagem } from "../entity/contagem";
+import { Endereco } from "../entity/endereco";
+import { Inventario } from "../entity/inventario";
 
 export class ContagemController {
 
     private repository = getRepository(Contagem);
 
+    private repositoryEndereco = getRepository(Endereco);
+
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.repository.find();
+        
+        const list = await this.repositoryEndereco.find();
+
+        
+        list.forEach(element => {
+            var endereco = new Endereco();
+            endereco.id = element.id;
+            var inventario = new Inventario();
+            inventario.id = 1;
+            
+            var json = {
+                'numeroContagem': '1',
+                'status': '0', 
+                'quantidade': 0, 
+                'observacao': '',
+                'data': null,
+                'inventario': inventario,
+                'endereco': endereco
+            };
+            
+            this.repository.save(json);                    
+           
+        });
+        
+
+        return list;
     }
 
     async one(request: Request, response: Response, next: NextFunction) {

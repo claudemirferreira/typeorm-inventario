@@ -1,13 +1,10 @@
-import {getRepository, DeepPartial} from "typeorm";
-import {NextFunction, Request, Response} from "express";
+import { getRepository } from "typeorm";
+import { NextFunction, Request, Response } from "express";
 import { Item } from "../entity/item";
-import { ItemXls } from "../entity/item-xls";
 
 export class ItemController {
 
     private repository = getRepository(Item);
-
-    private repositoryItemXls = getRepository(ItemXls);
 
     async all(request: Request, response: Response, next: NextFunction) {
 
@@ -25,7 +22,7 @@ export class ItemController {
             this.repository.save(json);            
         });
         
-        return list;
+        return this.repository.find();
         
     }
 
