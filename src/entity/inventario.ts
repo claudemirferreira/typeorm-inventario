@@ -1,5 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, JoinTable, ManyToMany, OneToMany} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
 import { Contagem } from "./contagem";
+import { Execucao } from "./Execucao";
 
 @Entity({name:"inv_inventario"})
 export class Inventario {
@@ -18,5 +19,8 @@ export class Inventario {
 
     @OneToMany(type => Contagem, contagem => contagem.inventario)
     contagens: Contagem[];
+
+    @OneToMany(type => Execucao, execucao => execucao.inventario)
+    execucoes: Execucao[];
 
 }
