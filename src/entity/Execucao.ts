@@ -11,7 +11,7 @@ export class Execucao {
     @Column({nullable:false})
     inicio: Date;
 
-    @Column({nullable:false})
+    @Column()
     fim: Date;
 
     @Column({length:30, nullable:false})

@@ -4,7 +4,6 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
-import { Item } from "./entity/item";
 import { Inventario } from "./entity/inventario";
 
 

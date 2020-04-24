@@ -3,6 +3,7 @@ import { ContagemController } from "./controller/ContagemController";
 import { ItemController } from "./controller/ItemController";
 import { ItemXlsController } from "./controller/ItemXlsController";
 import { EnderecoController } from "./controller/EnderecoController";
+import { ExecucaoController } from "./controller/ExecucaoController";
 
 export const Routes = [
     //inventario
@@ -130,6 +131,30 @@ export const Routes = [
         route: "/item-import/:id",
         controller: ItemXlsController,
         action: "remove"
+    },
+
+    //execucao
+    {
+        method: "get",
+        route: "/execucao",
+        controller: ExecucaoController,
+        action: "all"
+    }, {
+        method: "get",
+        route: "/execucao/:id",
+        controller: ExecucaoController,
+        action: "one"
+    }, {
+        method: "post",
+        route: "/execucao",
+        controller: ExecucaoController,
+        action: "save"
+    }, {
+        method: "delete",
+        route: "/execucao/:id",
+        controller: ExecucaoController,
+        action: "remove"
     }
+
 
 ];
