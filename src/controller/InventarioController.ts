@@ -19,8 +19,18 @@ export class InventarioController {
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
+        
         let userToRemove = await this.repository.findOne(request.params.id);
-        await this.repository.remove(userToRemove);
+
+        this.repository.delete(request.params.id)
+            .then((successResponse) => {
+            if (successResponse) {
+                return response.send(200);
+            } else {
+                return next(response.send(400));
+            }
+        });
+        
     }
 
 }
