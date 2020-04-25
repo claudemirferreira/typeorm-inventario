@@ -2,7 +2,7 @@ import { Inventario } from './inventario';
 import {Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm";
 
 
-@Entity({name:"inv_exec"})
+@Entity({name:"inv_execucao"})
 export class Execucao {
 
     @PrimaryGeneratedColumn({name:"exec_id"})
@@ -11,11 +11,11 @@ export class Execucao {
     @Column({nullable:false})
     inicio: Date;
 
-    @Column()
+    @Column({nullable:true})
     fim: Date;
 
-    @Column({length:30, nullable:false})
-    nome: string;
+    @Column({length:1, nullable:false})
+    status: string;
 
     @Column({length:60, nullable:false})
     descricao: string;    
