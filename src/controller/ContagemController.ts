@@ -11,32 +11,7 @@ export class ContagemController {
     private repositoryEndereco = getRepository(Endereco);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        
-        const list = await this.repositoryEndereco.find();
-
-        
-        list.forEach(element => {
-            var endereco = new Endereco();
-            endereco.id = element.id;
-            var inventario = new Inventario();
-            inventario.id = 1;
-            
-            var json = {
-                'numeroContagem': '1',
-                'status': '0', 
-                'quantidade': 0, 
-                'observacao': '',
-                'data': null,
-                'inventario': inventario,
-                'endereco': endereco
-            };
-            
-            this.repository.save(json);                    
-           
-        });
-        
-
-        return list;
+        return await this.repository.find();;
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
@@ -50,6 +25,34 @@ export class ContagemController {
     async remove(request: Request, response: Response, next: NextFunction) {
         let userToRemove = await this.repository.findOne(request.params.id);
         await this.repository.remove(userToRemove);
+    }
+
+    //servico para gerar o inventario
+    async gerarContagem(request: Request, response: Response, next: NextFunction) {
+        const list = await this.repositoryEndereco.find();
+
+        var inventario = new Inventario();
+        inventario.id = request.body.idInventario;
+        
+        list.forEach(element => {
+            var endereco = new Endereco();
+            endereco.id = element.id;
+            
+            var json = {
+                'numeroContagem': request.body.numeroContagem,
+                'status': '0', 
+                'quantidade': 0, 
+                'observacao': '',
+                'data': null,
+                'inventario': inventario,
+                'endereco': endereco
+            };
+            
+            this.repository.save(json);                    
+           
+        });
+        
+        return 'ok';
     }
 
 }

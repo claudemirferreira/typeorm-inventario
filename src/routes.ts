@@ -50,6 +50,11 @@ export const Routes = [
         route: "/contagem/:id",
         controller: ContagemController,
         action: "remove"
+    }, {
+        method: "post",
+        route: "/contagem/gerar-contagem",
+        controller: ContagemController,
+        action: "gerarContagem"
     },
 
     //item
