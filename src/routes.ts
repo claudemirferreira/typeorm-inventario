@@ -52,9 +52,19 @@ export const Routes = [
         action: "remove"
     }, {
         method: "post",
-        route: "/contagem/gerar-contagem",
+        route: "/contagem/gerar-primeira-contagem",
         controller: ContagemController,
-        action: "gerarContagem"
+        action: "gerarPrimeriraContagem"
+    }, {
+        method: "post",
+        route: "/contagem/gerar-segunda-contagem",
+        controller: ContagemController,
+        action: "gerarSegundaContagem"
+    }, {
+        method: "post",
+        route: "/contagem/gerar-terceira-contagem",
+        controller: ContagemController,
+        action: "gerarTerceiraContagem"
     },
 
     //item
@@ -159,7 +169,23 @@ export const Routes = [
         route: "/execucao/:id",
         controller: ExecucaoController,
         action: "remove"
+    }, {
+        method: "get",
+        route: "/execucao/inventario/:id",
+        controller: ExecucaoController,
+        action: "findIdInventario"
+    }, {
+        method: "put",
+        route: "/execucao/iniciar-contagem/:id",
+        controller: ExecucaoController,
+        action: "iniciarContagem"
+    }, {
+        method: "put",
+        route: "/execucao/finalizar-contagem/:id",
+        controller: ExecucaoController,
+        action: "finalizarContagem"
     }
 
+    //findIdInventario
 
 ];

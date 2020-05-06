@@ -28,9 +28,8 @@ export class ContagemController {
     }
 
     //servico para gerar o inventario
-    async gerarContagem(request: Request, response: Response, next: NextFunction) {
+    async gerarPrimeriraContagem(request: Request, response: Response, next: NextFunction) {
         const list = await this.repositoryEndereco.find();
-
         var inventario = new Inventario();
         inventario.id = request.body.idInventario;
         
@@ -39,7 +38,61 @@ export class ContagemController {
             endereco.id = element.id;
             
             var json = {
-                'numeroContagem': request.body.numeroContagem,
+                'numeroContagem': '1',//request.body.numeroContagem,
+                'status': '0', 
+                'quantidade': 0, 
+                'observacao': '',
+                'data': null,
+                'inventario': inventario,
+                'endereco': endereco
+            };
+            
+            this.repository.save(json);                    
+           
+        });
+        
+        return 'ok';
+    }
+
+    //servico para gerar o inventario
+    async gerarSegundaContagem(request: Request, response: Response, next: NextFunction) {
+        const list = await this.repositoryEndereco.find();
+        var inventario = new Inventario();
+        inventario.id = request.body.idInventario;
+        
+        list.forEach(element => {
+            var endereco = new Endereco();
+            endereco.id = element.id;
+            
+            var json = {
+                'numeroContagem': '2',//request.body.numeroContagem,
+                'status': '0', 
+                'quantidade': 0, 
+                'observacao': '',
+                'data': null,
+                'inventario': inventario,
+                'endereco': endereco
+            };
+            
+            this.repository.save(json);                    
+           
+        });
+        
+        return 'ok';
+    }
+
+    //servico para gerar o inventario
+    async gerarTerceiraContagem(request: Request, response: Response, next: NextFunction) {
+        const list = await this.repositoryEndereco.find();
+        var inventario = new Inventario();
+        inventario.id = request.body.idInventario;
+        
+        list.forEach(element => {
+            var endereco = new Endereco();
+            endereco.id = element.id;
+            
+            var json = {
+                'numeroContagem': '3', //request.body.numeroContagem,
                 'status': '0', 
                 'quantidade': 0, 
                 'observacao': '',

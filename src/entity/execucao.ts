@@ -1,6 +1,5 @@
 import { Inventario } from './inventario';
-import {Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm";
-
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm";
 
 @Entity({name:"inv_execucao"})
 export class Execucao {
@@ -8,13 +7,13 @@ export class Execucao {
     @PrimaryGeneratedColumn({name:"exec_id"})
     id: number;
 
-    @Column({nullable:false})
+    @Column({nullable:true})
     inicio: Date;
 
     @Column({nullable:true})
     fim: Date;
 
-    @Column({length:1, nullable:false})
+    @Column({nullable:false})
     status: string;
 
     @Column({length:60, nullable:false})

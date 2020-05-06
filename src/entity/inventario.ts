@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
 import { Contagem } from "./contagem";
-import { Execucao } from "./Execucao";
+import { Execucao } from "./execucao";
 
 @Entity({name:"inv_inventario"})
 export class Inventario {
@@ -14,8 +14,8 @@ export class Inventario {
     @Column({length:30, nullable:false})
     nome: string;
 
-    @Column({length:1, nullable:false})
-    status: string;
+    @Column({ nullable:false})
+    status: number;
 
     @OneToMany(type => Contagem, contagem => contagem.inventario)
     contagens: Contagem[];

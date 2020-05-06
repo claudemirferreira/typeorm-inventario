@@ -42,21 +42,12 @@ createConnection().then(async connection => {
 
     // insert new users for test
     /*
-
-   await connection.manager.save(connection.manager.create(Item, {
-        nome: "Administrador",
-        codigoBarras: "Arroz",
-        endereco: "Arroz",
-        quantidadeSistema: 10,
-        quantidadeFisica: 10,
-    })); 
-    */   
-
    await connection.manager.save(connection.manager.create(Inventario, {
         data: new Date(),
         nome: "Administrador",
-        status: "1",
-    }));  
+        status: 1,
+    }));   
+    */  
     
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
 
