@@ -31,6 +31,11 @@ export const Routes = [
 
     //contagem
     {
+        method: "post",
+        route: "/contagem/list",
+        controller: ContagemController,
+        action: "listItem"
+    }, {
         method: "get",
         route: "/contagem",
         controller: ContagemController,

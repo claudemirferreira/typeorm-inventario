@@ -14,6 +14,29 @@ export class ContagemController {
         return await this.repository.find();;
     }
 
+    async listItem(request: Request, response: Response, next: NextFunction) {
+        /*
+        return await this.repository.find({ 
+            join: {
+                alias: "contagem",
+                leftJoinAndSelect: {
+                    endereco: "contagem.endereco",
+                    item: "endereco.item"
+                }
+            }//
+            , where: { "endereco.item.codigo": "106049"} 
+        });
+        */
+       return await this.repository.createQueryBuilder("contagem")
+        .innerJoinAndSelect("contagem.endereco", "endereco")
+        .innerJoinAndSelect("endereco.item", "item")
+        .where("item.codigo= :codigo", { codigo: "443250" })
+        .getMany();
+        
+
+        //return await this.repository.find();;
+    }
+
     async one(request: Request, response: Response, next: NextFunction) {
         return this.repository.findOne(request.params.id);
     }
