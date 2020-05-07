@@ -25,12 +25,12 @@ export class ContagemController {
                 }
             }//
             , where: { "endereco.item.codigo": "106049"} 
-        });
+        }); request.body "443250"
         */
        return await this.repository.createQueryBuilder("contagem")
         .innerJoinAndSelect("contagem.endereco", "endereco")
         .innerJoinAndSelect("endereco.item", "item")
-        .where("item.codigo= :codigo", { codigo: "443250" })
+        .where("item.codigo= :codigo", { codigo: request.body.codigo})
         .getMany();
         
 
