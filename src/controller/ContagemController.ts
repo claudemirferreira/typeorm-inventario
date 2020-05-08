@@ -18,7 +18,7 @@ export class ContagemController {
        return await this.repository.createQueryBuilder("contagem")
         .innerJoinAndSelect("contagem.endereco", "endereco")
         .innerJoinAndSelect("endereco.item", "item")
-        .where("item.codigo= :codigo", { codigo: request.body.codigo})
+        .where("item.codigo= :codigo", { codigo: request.params.codigo})
         .getMany();
     }
 
