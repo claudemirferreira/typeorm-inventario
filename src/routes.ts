@@ -29,8 +29,13 @@ export const Routes = [
         action: "remove"
     },
 
-    //contagem efetuarContagem
+    //contagem listContagemPendente
     {
+        method: "post",
+        route: "/contagem/list-contagem-status/:id",
+        controller: ContagemController,
+        action: "listContagemStatus"
+    }, {
         method: "post",
         route: "/contagem/list",
         controller: ContagemController,

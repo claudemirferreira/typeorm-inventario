@@ -16,9 +16,17 @@ export class ContagemController {
 
     async listItem(request: Request, response: Response, next: NextFunction) {
        return await this.repository.createQueryBuilder("contagem")
-        .innerJoinAndSelect("contagem.endereco", "endereco")
+        .innerJoinAndSelect("contagem.inventario", "endereco")
         .innerJoinAndSelect("endereco.item", "item")
         .where("item.codigo= :codigo", { codigo: request.body.codigo})
+        .getMany();
+    }
+
+    async listContagemStatus(request: Request, response: Response, next: NextFunction) {
+       return await this.repository.createQueryBuilder("contagem")
+        .innerJoinAndSelect("contagem.inventario", "inventario")
+        .where("contagem.status= :status", { status: request.body.status})
+        .andWhere("inventario.id = :id", { id: request.params.id })
         .getMany();
     }
 
