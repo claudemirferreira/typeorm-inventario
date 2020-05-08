@@ -29,12 +29,17 @@ export const Routes = [
         action: "remove"
     },
 
-    //contagem
+    //contagem efetuarContagem
     {
         method: "post",
         route: "/contagem/list",
         controller: ContagemController,
         action: "listItem"
+    }, {
+        method: "post",
+        route: "/contagem/efetuar-contagem/:id",
+        controller: ContagemController,
+        action: "efetuarContagem"
     }, {
         method: "get",
         route: "/contagem",

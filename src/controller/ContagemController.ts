@@ -15,26 +15,19 @@ export class ContagemController {
     }
 
     async listItem(request: Request, response: Response, next: NextFunction) {
-        /*
-        return await this.repository.find({ 
-            join: {
-                alias: "contagem",
-                leftJoinAndSelect: {
-                    endereco: "contagem.endereco",
-                    item: "endereco.item"
-                }
-            }//
-            , where: { "endereco.item.codigo": "106049"} 
-        }); request.body "443250"
-        */
        return await this.repository.createQueryBuilder("contagem")
         .innerJoinAndSelect("contagem.endereco", "endereco")
         .innerJoinAndSelect("endereco.item", "item")
         .where("item.codigo= :codigo", { codigo: request.body.codigo})
         .getMany();
-        
+    }
 
-        //return await this.repository.find();;
+    async efetuarContagem(request: Request, response: Response, next: NextFunction) {
+        const contagem = await this.repository.findOne(request.params.id);
+        return await this.repository.update(request.params.id, { status: "1", 
+                                                                 quantidade: request.body.quantidade,
+                                                                 data: new Date
+                                                                });
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
