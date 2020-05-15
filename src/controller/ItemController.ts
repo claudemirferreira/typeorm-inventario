@@ -17,7 +17,10 @@ export class ItemController {
                         'nome': element.nome, 
                         'unidade': element.unidade,
                         'quantidadeSistema': element.quantidadeSistema,
-                        'quantidadeFisica': element.quantidadeFisica
+                        'quantidadeFisica': element.quantidadeFisica,
+                        'primeiraContagem': 0.00,
+                        'segundaContagem': 0.00,
+                        'terceiraContagem': 0.00
                     };
             this.repository.save(json);            
         });
