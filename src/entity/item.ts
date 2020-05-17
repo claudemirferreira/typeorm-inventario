@@ -16,6 +16,15 @@ export class Item {
     @Column({ type: 'decimal', precision: 20, scale: 2, nullable:false})
     quantidadeFisica: number;
 
+    @Column({ type: 'decimal', precision: 20, scale: 2, nullable:false})
+    primeiraContagem: number;
+
+    @Column({ type: 'decimal', precision: 20, scale: 2, nullable:false})
+    segundaContagem: number;
+
+    @Column({ type: 'decimal', precision: 20, scale: 2, nullable:false})
+    terceiraContagem: number;
+
     @OneToMany(type => Endereco, endereco => endereco.item)
     @JoinColumn({ name: "ende_id" })
     enderecos: Endereco[];

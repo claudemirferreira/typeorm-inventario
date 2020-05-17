@@ -39,9 +39,16 @@ export const Routes = [
         action: "listContagemStatus"
     }, {
         method: "get",
-        route: "/contagem/list/:codigo",
+        route: "/contagem/lista/:codigo",
         controller: ContagemController,
         action: "listItem"
+
+    // esse servico soma todas as contagem realizada e atualizar o total na tabela item
+    }, {
+        method: "post",
+        route: "/contagem/finalizar/:numeroContagem",
+        controller: ContagemController,
+        action: "finalizarContagem"
     }, {
         method: "post",
         route: "/contagem/efetuar-contagem/:id",
@@ -82,6 +89,11 @@ export const Routes = [
         route: "/contagem/gerar-terceira-contagem",
         controller: ContagemController,
         action: "gerarTerceiraContagem"
+    }, {
+        method: "get",
+        route: "/contagem/teste",
+        controller: ContagemController,
+        action: "teste"
     },
 
     //item
