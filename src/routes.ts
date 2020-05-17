@@ -1,3 +1,4 @@
+import { UserController } from './controller/UserController';
 import {InventarioController} from "./controller/InventarioController";
 import { ContagemController } from "./controller/ContagemController";
 import { ItemController } from "./controller/ItemController";
@@ -6,6 +7,7 @@ import { EnderecoController } from "./controller/EnderecoController";
 import { ExecucaoController } from "./controller/ExecucaoController";
 
 export const Routes = [
+
     //inventario
     {
         method: "get",
@@ -199,8 +201,34 @@ export const Routes = [
         route: "/execucao/finalizar-contagem/:id",
         controller: ExecucaoController,
         action: "finalizarContagem"
-    }
+    },
 
     //findIdInventario
+
+    //User
+    {
+        method: "get",
+        route: "/user/:id",
+        controller: UserController,
+        action: "one"
+    },
+    {
+        method: "post",
+        route: "/user/authentication",
+        controller: UserController,
+        action: "authentication"
+    },
+    {
+        method: "post",
+        route: "/user",
+        controller: UserController,
+        action: "save"
+    },
+    {
+        method: "delete",
+        route: "/user/:id",
+        controller: UserController,
+        action: "remove"
+    },
 
 ];

@@ -4,13 +4,12 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
-import { Inventario } from "./entity/inventario";
-
 
 createConnection().then(async connection => {
 
     // create express app
     const app = express();
+    const middleware = require("../src/middleware/auth")
     var cors = require('cors');
 
     app.use(cors());
@@ -22,9 +21,10 @@ createConnection().then(async connection => {
 
     // register express routes from defined application routes
     Routes.forEach(route => {
-        (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-            const result = (new (route.controller as any))[route.action](req, res, next);
+        //(app as any) [route.method] (route.route, middleware, (req: Request, res: Response, next: Function) => {
 
+        (app as any) [route.method] (route.route, middleware, (req: Request, res: Response, next: Function) => {
+            const result = (new (route.controller as any))[route.action] (req, res, next);
             if (result instanceof Promise) {
                 result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
 
