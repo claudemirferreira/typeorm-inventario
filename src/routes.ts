@@ -79,12 +79,12 @@ export const Routes = [
         action: "gerarPrimeriraContagem"
     }, {
         method: "post",
-        route: "/contagem/gerar-segunda-contagem",
+        route: "/contagem/gerar-segunda-contagem/:idInventario",
         controller: ContagemController,
         action: "gerarSegundaContagem"
     }, {
         method: "post",
-        route: "/contagem/gerar-terceira-contagem",
+        route: "/contagem/gerar-terceira-contagem/:idInventario",
         controller: ContagemController,
         action: "gerarTerceiraContagem"
     }, {

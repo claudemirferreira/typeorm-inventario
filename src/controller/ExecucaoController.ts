@@ -48,9 +48,22 @@ export class ExecucaoController {
     }
 
     async finalizarContagem(request: Request, response: Response, next: NextFunction) {
-        await this.repository.update(request.params.id, request.body);
-        const inventario = await this.repositoryInventario.findOne(request.body.inventario.id);
-        return await this.repositoryInventario.update(inventario.id, { status: inventario.status + 1 });
+        const list = await this.repositoryContagem.createQueryBuilder("contagem")
+                            .innerJoin("contagem.inventario", "inventario")
+                            .where("contagem.status= :status", { status: request.body.status })
+                            .andWhere("inventario.id = :id", { id: request.params.id })
+                            .getMany();
+        if (list.length > 0 ){
+            return response.status(500).send('existem itens pendentes de contagem, totoal= '+list.length);
+        }
+
+        try {
+            await this.repository.update(request.params.id, request.body);
+            const inventario = await this.repositoryInventario.findOne(request.body.inventario.id);
+            return await this.repositoryInventario.update(inventario.id, { status: inventario.status + 1 });
+        } catch (error) {
+            return response.status(500).send('erro ao atualizar o status do inventario');
+        }
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {

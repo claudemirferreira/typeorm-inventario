@@ -112,7 +112,7 @@ export class ContagemController {
     async gerarPrimeriraContagem(request: Request, response: Response, next: NextFunction) {
         const list = await this.repositoryEndereco.find();
         var inventario = new Inventario();
-        inventario.id = request.body.idInventario;
+        inventario.id = request.params.idInventario;
 
         list.forEach(element => {
             var endereco = new Endereco();
@@ -138,29 +138,21 @@ export class ContagemController {
     //servico para gerar o inventario
     async gerarSegundaContagem(request: Request, response: Response, next: NextFunction) {
 
-        //const list = await this.repositoryEndereco.find();
-        var inventario = new Inventario();
-        inventario.id = request.body.idInventario;
+        const list = await this.repositoryEndereco
+                                .createQueryBuilder("endereco")
+                                .innerJoin("endereco.item", "item")
+                                .where("item.quantidadeSistema != item.primeiraContagem")
+                                .getRawMany();
 
-        return await getRepository(Endereco)
-            .createQueryBuilder("endereco")
-            .innerJoinAndSelect("endereco.item", "item")
-            .where("item.quantidadeSistema != item.primeiraContagem")
-            .getRawMany();
-    }
-
-    //servico para gerar o inventario
-    async gerarTerceiraContagem(request: Request, response: Response, next: NextFunction) {
-        const list = await this.repositoryEndereco.find();
         var inventario = new Inventario();
-        inventario.id = request.body.idInventario;
+        inventario.id = request.params.idInventario;
 
         list.forEach(element => {
             var endereco = new Endereco();
-            endereco.id = element.id;
+            endereco.id = element.endereco_ende_id;
 
             var json = {
-                'numeroContagem': '3', //request.body.numeroContagem,
+                'numeroContagem': '2',//request.body.numeroContagem,
                 'status': '0',
                 'quantidade': 0,
                 'observacao': '',
@@ -168,12 +160,40 @@ export class ContagemController {
                 'inventario': inventario,
                 'endereco': endereco
             };
-
             this.repository.save(json);
-
         });
 
-        return 'ok';
+        return list;
+    }
+
+    //servico para gerar o inventario
+    async gerarTerceiraContagem(request: Request, response: Response, next: NextFunction) {
+        const list = await this.repositoryEndereco
+                                .createQueryBuilder("endereco")
+                                .innerJoin("endereco.item", "item")
+                                .where("item.quantidadeSistema != item.segundaContagem")
+                                .andWhere("item.primeiraContagem != item.segundaContagem")
+                                .getRawMany();
+
+        var inventario = new Inventario();
+        inventario.id = request.params.idInventario;
+
+        list.forEach(element => {
+            var endereco = new Endereco();
+            endereco.id = element.endereco_ende_id;
+
+            var json = {
+                'numeroContagem': '3',//request.body.numeroContagem,
+                'status': '0',
+                'quantidade': 0,
+                'observacao': '',
+                'data': null,
+                'inventario': inventario,
+                'endereco': endereco
+            };
+            this.repository.save(json);
+        });
+        return list;
     }
 
 }
