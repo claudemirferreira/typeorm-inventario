@@ -4,6 +4,7 @@ import { ItemController } from "./controller/ItemController";
 import { ItemXlsController } from "./controller/ItemXlsController";
 import { EnderecoController } from "./controller/EnderecoController";
 import { ExecucaoController } from "./controller/ExecucaoController";
+import { EmpresaController } from "./controller/EmpresaController";
 
 export const Routes = [
     //inventario
@@ -211,8 +212,34 @@ export const Routes = [
         route: "/execucao/finalizar-contagem/:id",
         controller: ExecucaoController,
         action: "finalizarContagem"
-    }
+    },
 
-    //findIdInventario
+    //inventario
+    {
+        method: "get",
+        route: "/empresa",
+        controller: EmpresaController,
+        action: "all"
+    }, {
+        method: "get",
+        route: "/empresa/:cnpj",
+        controller: EmpresaController,
+        action: "one"
+    }, {
+        method: "post",
+        route: "/empresa",
+        controller: EmpresaController,
+        action: "save"
+    }, {
+        method: "delete",
+        route: "/empresa/:cnpj",
+        controller: EmpresaController,
+        action: "remove"
+    }, {
+        method: "post",
+        route: "/empresa/find",
+        controller: EmpresaController,
+        action: "find"
+    }
 
 ];
