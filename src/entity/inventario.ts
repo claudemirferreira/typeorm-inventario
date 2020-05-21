@@ -1,6 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, ManyToOne} from "typeorm";
 import { Contagem } from "./contagem";
 import { Execucao } from "./execucao";
+import { Item } from "./item";
+import { Empresa } from "./Empresa";
+import { ItemXls } from "./item-xls";
 
 @Entity({name:"inv_inventario"})
 export class Inventario {
@@ -22,5 +25,17 @@ export class Inventario {
 
     @OneToMany(type => Execucao, execucao => execucao.inventario)
     execucoes: Execucao[];
+
+    @OneToMany(type => Item, item => item.inventario)
+    @JoinColumn({ name: "item_id" })
+    itens: Item[];
+
+    @ManyToOne(type => Empresa, empresa => empresa.inventarios)
+    @JoinColumn({ name: "empr_cnpj" })
+    empresa: Empresa;
+
+    @OneToMany(type => ItemXls, itemXls => itemXls.inventario)
+    @JoinColumn({ name: "item_xls_id" })
+    itensXls: ItemXls[];
 
 }

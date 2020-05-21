@@ -11,11 +11,8 @@ export class Endereco {
     @Column({length:60, nullable:false})
     descricao: string;
 
-    @Column({length:1, nullable:false})
-    status: string;
-
     @ManyToOne(type => Item, item => item.enderecos)
-    @JoinColumn({ name: "codigo" })
+    @JoinColumn({ name: "item_id" })
     item: Item;
 
     @OneToMany(type => Contagem, contagem => contagem.endereco)

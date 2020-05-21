@@ -98,9 +98,9 @@ export const Routes = [
     //item
     {
         method: "get",
-        route: "/item",
+        route: "/item/importItens/:inventarioId",
         controller: ItemController,
-        action: "all"
+        action: "importItens"
     }, {
         method: "get",
         route: "/item/:id",
@@ -168,7 +168,7 @@ export const Routes = [
         method: "post",
         route: "/item-import/all",
         controller: ItemXlsController,
-        action: "save"
+        action: "importarItens"
     }, {
         method: "delete",
         route: "/item-import/:id",

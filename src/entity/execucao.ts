@@ -13,7 +13,7 @@ export class Execucao {
     @Column({nullable:true})
     fim: Date;
 
-    @Column({nullable:false})
+    @Column({nullable:false, length:1})
     status: string;
 
     @Column({length:60, nullable:false})

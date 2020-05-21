@@ -15,10 +15,9 @@ export class EnderecoController {
         
         list.forEach(element => {
             let item = new Item();
-            item.codigo = element.codigo;
+            item.id = element.id;
             var json = {
                         'descricao': element.endereco,
-                        'status': '0',
                         'item': item
                     };
             this.repository.save(json);            

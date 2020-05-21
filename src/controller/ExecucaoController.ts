@@ -48,6 +48,33 @@ export class ExecucaoController {
     }
 
     async finalizarContagem(request: Request, response: Response, next: NextFunction) {
+        console.log('request.body.status='+request.body.status);
+        console.log('request.params.id='+request.params.id);
+        const list = await this.repositoryContagem.createQueryBuilder("contagem")
+                            .innerJoin("contagem.inventario", "inventario")
+                            .where("contagem.status= :status", { status: '0' })
+                            .andWhere("inventario.id = :id", { id: request.params.id })
+                            .getMany();
+
+        console.log('list.length='+list.length);
+
+        if (list.length > 0 ){
+            return response.status(500).send('existem '+list.length+' iten(s) pendente(s) de contagem.');
+        }
+
+        return list;
+        /*
+        try {
+            await this.repository.update(request.params.id, request.body);
+            const inventario = await this.repositoryInventario.findOne(request.body.inventario.id);
+            return await this.repositoryInventario.update(inventario.id, { status: inventario.status + 1 });
+        } catch (error) {
+            return response.status(500).send('erro ao atualizar o status do inventario');
+        }
+        */
+    }
+
+    async finalizarContagemOld(request: Request, response: Response, next: NextFunction) {
         const list = await this.repositoryContagem.createQueryBuilder("contagem")
                             .innerJoin("contagem.inventario", "inventario")
                             .where("contagem.status= :status", { status: request.body.status })
@@ -65,6 +92,7 @@ export class ExecucaoController {
             return response.status(500).send('erro ao atualizar o status do inventario');
         }
     }
+
 
     async remove(request: Request, response: Response, next: NextFunction) {
         let userToRemove = await this.repository.findOne(request.params.id);

@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, JoinTable, ManyToMany, OneToMany} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from "typeorm";
+import { Inventario } from "./inventario";
 
 @Entity({name:"inv_item_xls"})
 export class ItemXls {
@@ -23,5 +24,9 @@ export class ItemXls {
 
     @Column({ type: 'decimal', precision: 20, scale: 2, nullable:false})
     quantidade: number;
+
+    @ManyToOne(type => Inventario, inventario => inventario.itensXls)
+    @JoinColumn({ name: "inve_id" })
+    inventario: Inventario;
 
 }
