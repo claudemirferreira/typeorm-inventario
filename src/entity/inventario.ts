@@ -17,8 +17,8 @@ export class Inventario {
     @Column({length:30, nullable:false})
     nome: string;
 
-    @Column({ nullable:false})
-    status: number;
+    @Column({ nullable:false, length:1})
+    numeroContagem: string;
 
     @OneToMany(type => Contagem, contagem => contagem.inventario)
     contagens: Contagem[];
@@ -30,12 +30,12 @@ export class Inventario {
     @JoinColumn({ name: "item_id" })
     itens: Item[];
 
-    @ManyToOne(type => Empresa, empresa => empresa.inventarios)
-    @JoinColumn({ name: "empr_cnpj" })
-    empresa: Empresa;
-
     @OneToMany(type => ItemXls, itemXls => itemXls.inventario)
     @JoinColumn({ name: "item_xls_id" })
     itensXls: ItemXls[];
+
+    @ManyToOne(type => Empresa, empresa => empresa.inventarios)
+    @JoinColumn({ name: "empr_cnpj" })
+    empresa: Empresa;
 
 }

@@ -18,6 +18,7 @@ export class ContagemController {
     }
 
     async listItem(request: Request, response: Response, next: NextFunction) {
+        console.log('listItem');
         return await this.repository.createQueryBuilder("contagem")
             .innerJoinAndSelect("contagem.endereco", "endereco")
             .innerJoinAndSelect("endereco.item", "item")
@@ -25,63 +26,10 @@ export class ContagemController {
             .getMany();
     }
 
-    async finalizarContagem(request: Request, response: Response, next: NextFunction) {
-
-        if (request.params.numeroContagem != '1'
-            && request.params.numeroContagem != '2'
-            && request.params.numeroContagem != '3') {
-            console.error('numero da contagem invalido: ' + request.params.numeroContagem);
-            response.status(500).send('numero da contagem invalido: ' + request.params.numeroContagem);
-            return response;
-        }
-
-        const list = await getRepository(Contagem)
-            .createQueryBuilder("contagem")
-            .innerJoin("contagem.endereco", "endereco")
-            .innerJoin("endereco.item", "item")
-            .select("item.codigo codigo")
-            .addSelect("SUM(contagem.quantidade)", "quantidade")
-            .where("contagem.numeroContagem= :numeroContagem", { numeroContagem: request.params.numeroContagem })
-            .groupBy("item.codigo")
-            .getRawMany();
-
-        // atualizar a quantidade dos itens 
-        list.forEach(element => {
-            //primeira contagem
-            if (request.params.numeroContagem == '1') {
-                this.repositoryItem
-                    .createQueryBuilder()
-                    .update(Item)
-                    .set({ primeiraContagem: element.quantidade })
-                    .where("codigo = :codigo", { codigo: element.codigo })
-                    .execute();
-                    // segunda contagem
-            } else if (request.params.numeroContagem == '2') {
-                this.repositoryItem
-                    .createQueryBuilder()
-                    .update(Item)
-                    .set({ segundaContagem: element.quantidade })
-                    .where("codigo = :codigo", { codigo: element.codigo })
-                    .execute();
-                    // terceira contagem
-            } else if (request.params.numeroContagem == '3') {
-                this.repositoryItem
-                    .createQueryBuilder()
-                    .update(Item)
-                    .set({ terceiraContagem: element.quantidade })
-                    .where("codigo = :codigo", { codigo: element.codigo })
-                    .execute();
-            }
-
-        });
-
-        return list;
-    }
-
     async listContagemStatus(request: Request, response: Response, next: NextFunction) {
         return await this.repository.createQueryBuilder("contagem")
             .innerJoinAndSelect("contagem.inventario", "inventario")
-            .where("contagem.status= :status", { status: request.body.status })
+            .where("contagem.numeroContagem= :numeroContagem", { numeroContagem: request.body.status })
             .andWhere("inventario.id = :id", { id: request.params.id })
             .getMany();
     }
@@ -107,93 +55,5 @@ export class ContagemController {
         let userToRemove = await this.repository.findOne(request.params.id);
         await this.repository.remove(userToRemove);
     }
-
-    //servico para gerar o inventario
-    async gerarPrimeriraContagem(request: Request, response: Response, next: NextFunction) {
-        const list = await this.repositoryEndereco.find();
-        var inventario = new Inventario();
-        inventario.id = request.params.idInventario;
-
-        list.forEach(element => {
-            var endereco = new Endereco();
-            endereco.id = element.id;
-
-            var json = {
-                'numeroContagem': '1',//request.body.numeroContagem,
-                'status': '0',
-                'quantidade': 0,
-                'observacao': '',
-                'data': null,
-                'inventario': inventario,
-                'endereco': endereco
-            };
-
-            this.repository.save(json);
-
-        });
-
-        return 'ok';
-    }
-
-    //servico para gerar o inventario
-    async gerarSegundaContagem(request: Request, response: Response, next: NextFunction) {
-
-        const list = await this.repositoryEndereco
-                                .createQueryBuilder("endereco")
-                                .innerJoin("endereco.item", "item")
-                                .where("item.quantidadeSistema != item.primeiraContagem")
-                                .getRawMany();
-
-        var inventario = new Inventario();
-        inventario.id = request.params.idInventario;
-
-        list.forEach(element => {
-            var endereco = new Endereco();
-            endereco.id = element.endereco_ende_id;
-
-            var json = {
-                'numeroContagem': '2',//request.body.numeroContagem,
-                'status': '0',
-                'quantidade': 0,
-                'observacao': '',
-                'data': null,
-                'inventario': inventario,
-                'endereco': endereco
-            };
-            this.repository.save(json);
-        });
-
-        return list;
-    }
-
-    //servico para gerar o inventario
-    async gerarTerceiraContagem(request: Request, response: Response, next: NextFunction) {
-        const list = await this.repositoryEndereco
-                                .createQueryBuilder("endereco")
-                                .innerJoin("endereco.item", "item")
-                                .where("item.quantidadeSistema != item.segundaContagem")
-                                .andWhere("item.primeiraContagem != item.segundaContagem")
-                                .getRawMany();
-
-        var inventario = new Inventario();
-        inventario.id = request.params.idInventario;
-
-        list.forEach(element => {
-            var endereco = new Endereco();
-            endereco.id = element.endereco_ende_id;
-
-            var json = {
-                'numeroContagem': '3',//request.body.numeroContagem,
-                'status': '0',
-                'quantidade': 0,
-                'observacao': '',
-                'data': null,
-                'inventario': inventario,
-                'endereco': endereco
-            };
-            this.repository.save(json);
-        });
-        return list;
-    }
-
+    
 }

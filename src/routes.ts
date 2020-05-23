@@ -166,7 +166,7 @@ export const Routes = [
         action: "save"
     }, {
         method: "post",
-        route: "/item-import/all",
+        route: "/item-import/all/:inventarioId",
         controller: ItemXlsController,
         action: "importarItens"
     }, {
@@ -204,12 +204,12 @@ export const Routes = [
         action: "findIdInventario"
     }, {
         method: "put",
-        route: "/execucao/iniciar-contagem/:id",
+        route: "/execucao/iniciarContagem/:inventarioId",
         controller: ExecucaoController,
         action: "iniciarContagem"
     }, {
         method: "put",
-        route: "/execucao/finalizar-contagem/:id",
+        route: "/execucao/finalizarContagem/:inventarioId",
         controller: ExecucaoController,
         action: "finalizarContagem"
     },

@@ -14,7 +14,7 @@ export class Contagem {
     @Column({ nullable:false, length:1 })
     status: string;
 
-    @Column({ type: 'decimal', precision: 20, scale: 2, nullable:false})
+    @Column({ type: 'decimal', precision: 20, scale: 2, nullable:true})
     quantidade: number;
 
     @Column({ nullable:true})

@@ -1,6 +1,7 @@
 import {getRepository, getManager} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import { ItemXls } from "../entity/item-xls";
+import { Inventario } from "../entity/inventario";
 
 export class ItemXlsController {
 
@@ -16,16 +17,6 @@ export class ItemXlsController {
         return this.repository.findOne(request.params.id);
     }
 
-    async save(request: Request, response: Response, next: NextFunction) {
-        console.log(0);
-        const list = await this.repository.save(request.body);
-        console.log(1);
-        var sql = 'CALL importarItens(1)';
-        const result = await this.manager.query(sql);
-        console.log(2);
-        return list;
-    }
-
     async remove(request: Request, response: Response, next: NextFunction) {
         let userToRemove = await this.repository.findOne(request.params.id);
         await this.repository.remove(userToRemove);
@@ -33,9 +24,17 @@ export class ItemXlsController {
 
     async importarItens(request: Request, response: Response, next: NextFunction) {
         console.log('iniciou a importacao item-xls');
+        var itensXls = request.body;
+        var inventario = new Inventario();
+        inventario.id = request.params.inventarioId;
+        itensXls.forEach(element => {
+            element.inventario = inventario;
+        });
+        console.log(JSON.stringify(itensXls));
         const list = await this.repository.save(request.body);
         console.log('iniciou a importacao item e endereco');
-        var sql = 'CALL importarItens(1)';
+        var sql = 'CALL importarItens('+request.params.inventarioId+')';
+        console.log('executou a procedure ' + sql);
         const result = await this.manager.query(sql);
         console.log('importcao concluida');
         return list;

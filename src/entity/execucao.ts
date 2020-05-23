@@ -14,7 +14,7 @@ export class Execucao {
     fim: Date;
 
     @Column({nullable:false, length:1})
-    status: string;
+    numeroContagem: string;
 
     @Column({length:60, nullable:false})
     descricao: string;    
