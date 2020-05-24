@@ -55,6 +55,11 @@ export const Routes = [
         action: "efetuarContagem"
     }, {
         method: "get",
+        route: "/contagem/inventario/:id",
+        controller: ContagemController,
+        action: "findIdInventario"
+    }, {
+        method: "get",
         route: "/contagem",
         controller: ContagemController,
         action: "all"
@@ -73,26 +78,6 @@ export const Routes = [
         route: "/contagem/:id",
         controller: ContagemController,
         action: "remove"
-    }, {
-        method: "post",
-        route: "/contagem/gerar-primeira-contagem",
-        controller: ContagemController,
-        action: "gerarPrimeriraContagem"
-    }, {
-        method: "post",
-        route: "/contagem/gerar-segunda-contagem/:idInventario",
-        controller: ContagemController,
-        action: "gerarSegundaContagem"
-    }, {
-        method: "post",
-        route: "/contagem/gerar-terceira-contagem/:idInventario",
-        controller: ContagemController,
-        action: "gerarTerceiraContagem"
-    }, {
-        method: "get",
-        route: "/contagem/teste",
-        controller: ContagemController,
-        action: "teste"
     },
 
     //item

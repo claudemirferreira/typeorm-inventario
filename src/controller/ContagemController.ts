@@ -43,6 +43,21 @@ export class ContagemController {
         });
     }
 
+    async findIdInventario(request: Request, response: Response, next: NextFunction) {
+        console.log('findIdInventario');
+        const list = await this.repository.createQueryBuilder("contagem")
+                            .innerJoin("contagem.inventario", "inventario")
+                            .innerJoinAndSelect("contagem.endereco","endereco")
+                            .innerJoinAndSelect("endereco.item","item")
+                            .where("inventario.id = :id", { id: request.params.id })                            
+                            .orderBy({
+                                        "contagem.numeroContagem": "DESC",
+                                        "item.nome": "ASC"
+                                    })
+                            .getMany();
+        return list;
+    }
+
     async one(request: Request, response: Response, next: NextFunction) {
         return this.repository.findOne(request.params.id);
     }
