@@ -26,7 +26,7 @@ CREATE TABLE `inv_contagem` (
   `cont_id` int(11) NOT NULL AUTO_INCREMENT,
   `numeroContagem` varchar(1) NOT NULL,
   `status` varchar(1) NOT NULL,
-  `quantidade` decimal(20,2) NOT NULL,
+  `quantidade` decimal(20,2) DEFAULT NULL,
   `data` datetime DEFAULT NULL,
   `observacao` varchar(100) NOT NULL,
   `inve_id` int(11) DEFAULT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `inv_contagem` (
   KEY `FK_c0d92d5995562a50c117d07b6ab` (`ende_id`),
   CONSTRAINT `FK_c0d92d5995562a50c117d07b6ab` FOREIGN KEY (`ende_id`) REFERENCES `inv_endereco` (`ende_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_c5e73032b0cdebccf584a7a1de8` FOREIGN KEY (`inve_id`) REFERENCES `inv_inventario` (`inve_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=395 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `inv_contagem` (
 
 LOCK TABLES `inv_contagem` WRITE;
 /*!40000 ALTER TABLE `inv_contagem` DISABLE KEYS */;
-INSERT INTO `inv_contagem` VALUES (1,'1','0',0.00,NULL,'',1,9),(2,'1','0',288000.00,NULL,'',1,1),(3,'1','0',0.00,NULL,'',1,4),(4,'1','0',0.00,NULL,'',1,10),(5,'1','0',0.00,NULL,'',1,11),(6,'1','0',0.00,NULL,'',1,12),(7,'1','0',0.00,NULL,'',1,8),(8,'1','0',1.00,NULL,'',1,2),(9,'1','0',1.00,NULL,'',1,5),(10,'1','0',1.00,NULL,'',1,6),(11,'1','0',0.00,NULL,'',1,3),(12,'1','0',1.00,NULL,'',1,7),(13,'1','0',0.00,NULL,'',1,13),(14,'1','0',0.00,NULL,'',1,14),(15,'1','0',0.00,NULL,'',1,15),(16,'1','0',0.00,NULL,'',1,16),(17,'1','0',0.00,NULL,'',1,17),(18,'1','0',0.00,NULL,'',1,18),(19,'1','0',0.00,NULL,'',1,19),(20,'1','0',0.00,NULL,'',1,20),(21,'1','0',0.00,NULL,'',1,21),(22,'1','0',0.00,NULL,'',1,22),(23,'1','0',0.00,NULL,'',1,23),(24,'1','0',0.00,NULL,'',1,24),(25,'1','0',0.00,NULL,'',1,25),(26,'1','0',0.00,NULL,'',1,26),(27,'1','0',0.00,NULL,'',1,27),(28,'1','0',0.00,NULL,'',1,28),(29,'1','0',0.00,NULL,'',1,29),(30,'1','0',0.00,NULL,'',1,30),(31,'1','0',0.00,NULL,'',1,31),(32,'1','0',0.00,NULL,'',1,32),(33,'1','0',0.00,NULL,'',1,33),(34,'1','0',0.00,NULL,'',1,34),(35,'1','0',0.00,NULL,'',1,35),(36,'1','0',0.00,NULL,'',1,36),(37,'1','0',0.00,NULL,'',1,37),(38,'1','0',0.00,NULL,'',1,38),(39,'1','0',0.00,NULL,'',1,39),(40,'1','0',0.00,NULL,'',1,40),(41,'1','0',0.00,NULL,'',1,41),(42,'1','0',0.00,NULL,'',1,42),(43,'1','0',0.00,NULL,'',1,43),(44,'1','0',0.00,NULL,'',1,44),(45,'1','0',0.00,NULL,'',1,45),(46,'1','0',0.00,NULL,'',1,46),(47,'1','0',0.00,NULL,'',1,47),(48,'1','0',0.00,NULL,'',1,48);
+INSERT INTO `inv_contagem` VALUES (349,'1','0',0.00,NULL,'',18,345),(350,'1','0',0.00,NULL,'',18,346),(351,'1','0',0.00,NULL,'',18,347),(352,'1','0',0.00,NULL,'',18,348),(353,'1','0',0.00,NULL,'',18,349),(354,'1','0',0.00,NULL,'',18,350),(355,'1','0',0.00,NULL,'',18,351),(356,'1','0',0.00,NULL,'',18,352),(357,'1','0',0.00,NULL,'',18,353),(358,'1','0',0.00,NULL,'',18,354),(359,'1','0',0.00,NULL,'',18,355),(360,'1','0',0.00,NULL,'',18,356),(364,'1','0',0.00,NULL,'',19,360),(365,'1','0',0.00,NULL,'',19,361),(366,'1','0',0.00,NULL,'',19,362),(367,'1','0',0.00,NULL,'',19,363),(368,'1','0',0.00,NULL,'',19,364),(369,'1','0',0.00,NULL,'',19,372),(370,'1','0',0.00,NULL,'',19,373),(371,'1','0',0.00,NULL,'',19,374),(372,'1','0',0.00,NULL,'',19,375),(373,'1','0',0.00,NULL,'',19,376),(374,'1','0',0.00,NULL,'',19,365),(375,'1','0',0.00,NULL,'',19,377),(376,'1','0',0.00,NULL,'',19,366),(377,'1','0',0.00,NULL,'',19,367),(378,'1','0',0.00,NULL,'',19,368),(379,'1','0',0.00,NULL,'',19,369),(380,'1','0',0.00,NULL,'',19,370),(381,'1','0',0.00,NULL,'',19,378),(382,'1','0',0.00,NULL,'',19,379),(383,'1','0',0.00,NULL,'',19,380),(384,'1','0',0.00,NULL,'',19,381),(385,'1','0',0.00,NULL,'',19,382),(386,'1','0',0.00,NULL,'',19,371),(387,'1','0',0.00,NULL,'',19,383);
 /*!40000 ALTER TABLE `inv_contagem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,12 +59,11 @@ DROP TABLE IF EXISTS `inv_endereco`;
 CREATE TABLE `inv_endereco` (
   `ende_id` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(60) NOT NULL,
-  `status` varchar(1) NOT NULL,
-  `codigo` varchar(20) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`ende_id`),
-  KEY `FK_ddb0be5a870677d1b5cca78a806` (`codigo`),
-  CONSTRAINT `FK_ddb0be5a870677d1b5cca78a806` FOREIGN KEY (`codigo`) REFERENCES `inv_item` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+  KEY `FK_ea3b109be8fa4bbcdf29ff3d398` (`item_id`),
+  CONSTRAINT `FK_ea3b109be8fa4bbcdf29ff3d398` FOREIGN KEY (`item_id`) REFERENCES `inv_item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=391 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +72,7 @@ CREATE TABLE `inv_endereco` (
 
 LOCK TABLES `inv_endereco` WRITE;
 /*!40000 ALTER TABLE `inv_endereco` DISABLE KEYS */;
-INSERT INTO `inv_endereco` VALUES (1,'01-13-G-04-021','0','306181'),(2,'01-13-G-04-022','0','306181'),(3,'01-12-A-11-004','0','443250'),(4,'01-12-A-13-041','0','408878'),(5,'01-13-G-05-019','0','306181'),(6,'01-13-H-05-004','0','306181'),(7,'01-13-F-04-006','0','306181'),(8,'01-12-R-12-004','0','106049'),(9,'01-12-A-10-023','0','443250'),(10,'01-12-A-10-029','0','443250'),(11,'01-12-A-11-001','0','443250'),(12,'01-12-A-11-003','0','443250'),(13,'01-12-Q-00-011','0','408878'),(14,'01-12-Q-00-014','0','443250'),(15,'01-12-Q-01-028','0','443250'),(16,'01-12-Q-02-007','0','408878'),(17,'01-12-Q-03-035','0','443250'),(18,'01-12-Q-04-001','0','443250'),(19,'01-12-Q-04-026','0','443250'),(20,'01-12-Q-04-035','0','443250'),(21,'01-12-Q-01-008','0','408878'),(22,'01-12-Q-07-012','0','443250'),(23,'01-12-Q-07-027','0','443250'),(24,'01-12-Q-08-035','0','443250'),(25,'01-12-Q-09-011','0','443250'),(26,'01-12-Q-12-001','0','408878'),(27,'01-12-Q-12-006','0','408878'),(28,'01-12-Q-12-010','0','408878'),(29,'01-12-R-00-055','0','408878'),(30,'01-12-R-06-002','0','408878'),(31,'01-12-Q-04-053','0','408878'),(32,'01-12-R-05-037','0','117013'),(33,'01-12-Q-00-004','0','408878'),(34,'01-12-Q-13-035','0','443250'),(35,'01-12-S-08-042','0','408878'),(36,'01-12-H-13-002','0','255792'),(37,'01-12-R-03-009','0','457878'),(38,'01-12-Q-06-011','0','408878'),(39,'01-12-T-03-004','0','408878'),(40,'01-12-C-07-022','0','390351'),(41,'01-12-S-03-034','0','106267'),(42,'01-12-Q-02-019','0','106034'),(43,'01-12-H-06-020','0','115306'),(44,'01-12-M-02-017','0','244117'),(45,'01-12-R-02-044','0','117068'),(46,'01-12-B-10-002','0','255792'),(47,'01-12-Q-10-036','0','117082'),(48,'01-12-R-02-004','0','106049');
+INSERT INTO `inv_endereco` VALUES (345,'01-13-G-04-021',65),(346,'01-13-G-04-022',65),(347,'01-13-G-05-019',65),(348,'01-13-H-05-004',65),(349,'01-13-F-04-006',65),(350,'01-12-R-12-004',66),(351,'01-12-A-10-023',67),(352,'01-12-A-10-029',67),(353,'01-12-A-11-001',67),(354,'01-12-A-11-003',67),(355,'01-12-A-11-004',67),(356,'01-12-A-13-041',68),(360,'01-13-G-04-021',72),(361,'01-13-G-04-022',72),(362,'01-13-G-05-019',72),(363,'01-13-H-05-004',72),(364,'01-13-F-04-006',72),(365,'01-12-R-12-004',73),(366,'01-12-A-10-023',74),(367,'01-12-A-10-029',74),(368,'01-12-A-11-001',74),(369,'01-12-A-11-003',74),(370,'01-12-A-11-004',74),(371,'01-12-A-13-041',75),(372,'01-13-G-04-021',72),(373,'01-13-G-04-022',72),(374,'01-13-G-05-019',72),(375,'01-13-H-05-004',72),(376,'01-13-F-04-006',72),(377,'01-12-R-12-004',73),(378,'01-12-A-10-023',74),(379,'01-12-A-10-029',74),(380,'01-12-A-11-001',74),(381,'01-12-A-11-003',74),(382,'01-12-A-11-004',74),(383,'01-12-A-13-041',75);
 /*!40000 ALTER TABLE `inv_endereco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,13 +87,13 @@ CREATE TABLE `inv_execucao` (
   `exec_id` int(11) NOT NULL AUTO_INCREMENT,
   `inicio` datetime DEFAULT NULL,
   `fim` datetime DEFAULT NULL,
-  `status` varchar(255) NOT NULL,
+  `numeroContagem` varchar(1) NOT NULL,
   `descricao` varchar(60) NOT NULL,
   `inve_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`exec_id`),
   KEY `FK_87ee257a86f34226cc90b855bf6` (`inve_id`),
   CONSTRAINT `FK_87ee257a86f34226cc90b855bf6` FOREIGN KEY (`inve_id`) REFERENCES `inv_inventario` (`inve_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +102,7 @@ CREATE TABLE `inv_execucao` (
 
 LOCK TABLES `inv_execucao` WRITE;
 /*!40000 ALTER TABLE `inv_execucao` DISABLE KEYS */;
-INSERT INTO `inv_execucao` VALUES (1,'2020-05-14 15:24:11',NULL,'1','',2),(2,NULL,NULL,'2','',2),(3,NULL,NULL,'3','',2);
+INSERT INTO `inv_execucao` VALUES (53,'2020-05-24 08:17:08',NULL,'1','',18),(54,NULL,NULL,'2','',18),(55,NULL,NULL,'3','',18),(56,'2020-05-24 08:28:33',NULL,'1','',19),(57,NULL,NULL,'2','',19),(58,NULL,NULL,'3','',19);
 /*!40000 ALTER TABLE `inv_execucao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,9 +117,12 @@ CREATE TABLE `inv_inventario` (
   `inve_id` int(11) NOT NULL AUTO_INCREMENT,
   `data` datetime NOT NULL,
   `nome` varchar(30) NOT NULL,
-  `status` int(11) NOT NULL,
-  PRIMARY KEY (`inve_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+  `empr_cnpj` varchar(14) DEFAULT NULL,
+  `numeroContagem` varchar(1) NOT NULL,
+  PRIMARY KEY (`inve_id`),
+  KEY `FK_39735495a327a74a2a723d73292` (`empr_cnpj`),
+  CONSTRAINT `FK_39735495a327a74a2a723d73292` FOREIGN KEY (`empr_cnpj`) REFERENCES `saa_empresa` (`empr_cnpj`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +131,7 @@ CREATE TABLE `inv_inventario` (
 
 LOCK TABLES `inv_inventario` WRITE;
 /*!40000 ALTER TABLE `inv_inventario` DISABLE KEYS */;
-INSERT INTO `inv_inventario` VALUES (1,'2020-05-14 15:17:02','Administrador',1),(2,'2020-05-14 00:00:00','semp',1),(3,'2020-05-14 15:38:48','Administrador',1),(4,'2020-05-14 16:08:32','Administrador',1),(5,'2020-05-14 16:11:47','Administrador',1),(6,'2020-05-14 16:12:50','Administrador',1),(7,'2020-05-14 17:05:19','Administrador',1),(8,'2020-05-14 17:14:15','Administrador',1),(9,'2020-05-14 17:15:01','Administrador',1),(10,'2020-05-14 17:16:04','Administrador',1),(11,'2020-05-14 17:35:56','Administrador',1);
+INSERT INTO `inv_inventario` VALUES (18,'2020-05-24 00:00:00','SEMP',NULL,'1'),(19,'2020-05-24 00:00:00','Semp novo',NULL,'1');
 /*!40000 ALTER TABLE `inv_inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,15 +143,22 @@ DROP TABLE IF EXISTS `inv_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `inv_item` (
-  `codigo` varchar(20) NOT NULL,
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(60) NOT NULL,
   `nome` varchar(200) NOT NULL,
   `quantidadeSistema` decimal(20,2) NOT NULL,
   `quantidadeFisica` decimal(20,2) NOT NULL,
   `primeiraContagem` decimal(20,2) NOT NULL,
   `segundaContagem` decimal(20,2) NOT NULL,
   `terceiraContagem` decimal(20,2) NOT NULL,
-  PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `empr_cnpj` varchar(14) DEFAULT NULL,
+  `inve_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`item_id`),
+  KEY `FK_f55c8efb731579fe9ac6f6b097b` (`empr_cnpj`),
+  KEY `FK_b362b15e54eeaa27bcf6ee6964d` (`inve_id`),
+  CONSTRAINT `FK_b362b15e54eeaa27bcf6ee6964d` FOREIGN KEY (`inve_id`) REFERENCES `inv_inventario` (`inve_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_f55c8efb731579fe9ac6f6b097b` FOREIGN KEY (`empr_cnpj`) REFERENCES `saa_empresa` (`empr_cnpj`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +167,7 @@ CREATE TABLE `inv_item` (
 
 LOCK TABLES `inv_item` WRITE;
 /*!40000 ALTER TABLE `inv_item` DISABLE KEYS */;
-INSERT INTO `inv_item` VALUES ('106034','RES META 101 J 1/10W 1608TSMD',51783.00,0.00,0.00,0.00,0.00),('106049','RES META 103 J 1/10W 1608TSMD',40000.00,0.00,0.00,0.00,0.00),('106267','RES META 472 J 1/10W 1608TSMD',52439.00,0.00,0.00,0.00,0.00),('115306','DIODO SIN 1N4148 DO35 AT26',51247.00,0.00,0.00,0.00,0.00),('117013','RES META 102 J 1/4W 3216 SMD',89130.00,0.00,0.00,0.00,0.00),('117068','RES META 121 J 1/10W 1608 SMD',50319.00,0.00,0.00,0.00,0.00),('117082','RES META 563 J 1/10W 1608 SMD',40000.00,0.00,0.00,0.00,0.00),('244117','ETIQUETA ANATEL FAX MODEM 2980',46829.00,0.00,0.00,0.00,0.00),('255792','DIODO RET FR104 DO41',40000.00,0.00,0.00,0.00,0.00),('306181','ETIQUETA AUTO ADESIVA 39X11MM',288000.00,0.00,288004.00,0.00,0.00),('390351','CAP CERA 331 2V Y EEFSX0D331EY',63866.00,0.00,0.00,0.00,0.00),('408878','CAP CERA 104 K 50V X7R 1608',56000.00,0.00,0.00,0.00,0.00),('443250','CAP CERA 104 Z 50V Y5V 1608',160000.00,0.00,0.00,0.00,0.00),('457878','BOBINA LQW15AN2N2C10 SMD',60000.00,0.00,0.00,0.00,0.00);
+INSERT INTO `inv_item` VALUES (65,'306181','ETIQUETA AUTO ADESIVA 39X11MM',288000.00,0.00,0.00,0.00,0.00,NULL,18),(66,'106049','RES META 103 J 1/10W 1608TSMD',160127.00,0.00,0.00,0.00,0.00,NULL,18),(67,'443250','CAP CERA 104 Z 50V Y5V 1608',160000.00,0.00,0.00,0.00,0.00,NULL,18),(68,'408878','CAP CERA 104 K 50V X7R 1608',160000.00,0.00,0.00,0.00,0.00,NULL,18),(72,'306181','ETIQUETA AUTO ADESIVA 39X11MM',288000.00,0.00,0.00,0.00,0.00,NULL,19),(73,'106049','RES META 103 J 1/10W 1608TSMD',160127.00,0.00,0.00,0.00,0.00,NULL,19),(74,'443250','CAP CERA 104 Z 50V Y5V 1608',160000.00,0.00,0.00,0.00,0.00,NULL,19),(75,'408878','CAP CERA 104 K 50V X7R 1608',160000.00,0.00,0.00,0.00,0.00,NULL,19);
 /*!40000 ALTER TABLE `inv_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,8 +186,11 @@ CREATE TABLE `inv_item_xls` (
   `endereco` varchar(50) NOT NULL,
   `boleto` varchar(60) NOT NULL,
   `quantidade` decimal(20,2) NOT NULL,
-  PRIMARY KEY (`item_xls_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+  `inve_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`item_xls_id`),
+  KEY `FK_bb19cc582cb3514e3ad307219c9` (`inve_id`),
+  CONSTRAINT `FK_bb19cc582cb3514e3ad307219c9` FOREIGN KEY (`inve_id`) REFERENCES `inv_inventario` (`inve_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=229 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,9 +199,257 @@ CREATE TABLE `inv_item_xls` (
 
 LOCK TABLES `inv_item_xls` WRITE;
 /*!40000 ALTER TABLE `inv_item_xls` DISABLE KEYS */;
-INSERT INTO `inv_item_xls` VALUES (1,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-04-021','0100018671',288000.00),(2,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-04-022','0100018676',288000.00),(3,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-05-019','0100018663',288000.00),(4,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-H-05-004','0100018688',288000.00),(5,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-F-04-006','0100018499',288000.00),(6,'RES META 103 J 1/10W 1608TSMD','106049','PC','01-12-R-12-004','0100014773',160127.00),(7,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-10-023','0100009922',160000.00),(8,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-10-029','0100009985',160000.00),(9,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-001','0100009673',160000.00),(10,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-003','0100009695',160000.00),(11,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-004','0100009706',160000.00),(12,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-A-13-041','0100010135',160000.00),(13,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-00-011','0100014190',160000.00),(14,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-00-014','0100014227',160000.00),(15,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-01-008','0100014157',160000.00),(16,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-01-028','0100014398',160000.00),(17,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-02-007','0100014147',160000.00),(18,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-03-035','0100014478',160000.00),(19,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-04-001','0100014072',160000.00),(20,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-04-026','0100014376',160000.00),(21,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-04-035','0100014479',160000.00),(22,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-07-012','0100014209',160000.00),(23,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-07-027','0100014390',160000.00),(24,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-08-035','0100014483',160000.00),(25,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-09-011','0100014198',160000.00),(26,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-12-001','0100014080',160000.00),(27,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-12-006','0100014144',160000.00),(28,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-12-010','0100014188',160000.00),(29,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-R-00-055','0100015373',160000.00),(30,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-R-06-002','0100014743',160000.00),(31,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-04-053','0100014693',112000.00),(32,'RES META 102 J 1/4W 3216 SMD','117013','PC','01-12-R-05-037','0100015164',89130.00),(33,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-00-004','0100014108',160000.00),(34,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-Q-13-035','0100014487',80000.00),(35,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-S-08-042','0100015870',64000.00),(36,'DIODO RET FR104 DO41','255792','PC','01-12-H-13-002','0100011973',60582.00),(37,'BOBINA LQW15AN2N2C10 SMD','457878','PC','01-12-R-03-009','0100014827',60000.00),(38,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-Q-06-011','0100014196',56000.00),(39,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-T-03-004','0100016039',112000.00),(40,'CAP CERA 331 2V Y EEFSX0D331EY','390351','PC','01-12-C-07-022','0100010839',63866.00),(41,'RES META 472 J 1/10W 1608TSMD','106267','PC','01-12-S-03-034','0100015778',52439.00),(42,'RES META 101 J 1/10W 1608TSMD','106034','PC','01-12-Q-02-019','0100014291',51783.00),(43,'DIODO SIN 1N4148 DO35 AT26','115306','PC','01-12-H-06-020','0100012198',51247.00),(44,'ETIQUETA ANATEL FAX MODEM 2980','244117','PC','01-12-M-02-017','0100013261',46829.00),(45,'RES META 121 J 1/10W 1608 SMD','117068','PC','01-12-R-02-044','0100015246',50319.00),(46,'DIODO RET FR104 DO41','255792','PC','01-12-B-10-002','0100010315',40000.00),(47,'RES META 563 J 1/10W 1608 SMD','117082','PC','01-12-Q-10-036','0100014497',40000.00),(48,'RES META 103 J 1/10W 1608TSMD','106049','PC','01-12-R-02-004','0100014766',40000.00);
+INSERT INTO `inv_item_xls` VALUES (205,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-04-021','0100018671',288000.00,18),(206,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-04-022','0100018676',288000.00,18),(207,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-05-019','0100018663',288000.00,18),(208,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-H-05-004','0100018688',288000.00,18),(209,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-F-04-006','0100018499',288000.00,18),(210,'RES META 103 J 1/10W 1608TSMD','106049','PC','01-12-R-12-004','0100014773',160127.00,18),(211,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-10-023','0100009922',160000.00,18),(212,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-10-029','0100009985',160000.00,18),(213,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-001','0100009673',160000.00,18),(214,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-003','0100009695',160000.00,18),(215,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-004','0100009706',160000.00,18),(216,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-A-13-041','0100010135',160000.00,18),(217,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-04-021','0100018671',288000.00,19),(218,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-04-022','0100018676',288000.00,19),(219,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-G-05-019','0100018663',288000.00,19),(220,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-H-05-004','0100018688',288000.00,19),(221,'ETIQUETA AUTO ADESIVA 39X11MM','306181','PC','01-13-F-04-006','0100018499',288000.00,19),(222,'RES META 103 J 1/10W 1608TSMD','106049','PC','01-12-R-12-004','0100014773',160127.00,19),(223,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-10-023','0100009922',160000.00,19),(224,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-10-029','0100009985',160000.00,19),(225,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-001','0100009673',160000.00,19),(226,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-003','0100009695',160000.00,19),(227,'CAP CERA 104 Z 50V Y5V 1608','443250','PC','01-12-A-11-004','0100009706',160000.00,19),(228,'CAP CERA 104 K 50V X7R 1608','408878','PC','01-12-A-13-041','0100010135',160000.00,19);
 /*!40000 ALTER TABLE `inv_item_xls` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `saa_empresa`
+--
+
+DROP TABLE IF EXISTS `saa_empresa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `saa_empresa` (
+  `empr_cnpj` varchar(14) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`empr_cnpj`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `saa_empresa`
+--
+
+LOCK TABLES `saa_empresa` WRITE;
+/*!40000 ALTER TABLE `saa_empresa` DISABLE KEYS */;
+/*!40000 ALTER TABLE `saa_empresa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'dbinventario'
+--
+
+--
+-- Dumping routines for database 'dbinventario'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `finalizarContagem` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `finalizarContagem`(IN p_inve_id INT
+																, IN p_exec_id INT
+                                                                , IN p_numero_contagem VARCHAR(1))
+BEGIN	
+    -- Declare local variables
+   DECLARE done BOOLEAN DEFAULT 0;
+   DECLARE v_item_id INT;
+   DECLARE v_quantidade DECIMAL(20,2);
+   DECLARE v_numero_contagem varchar(1);
+   -- Declare the cursor
+   DECLARE cursorContagem CURSOR FOR
+		SELECT c.item_id item_id, sum( a.quantidade) quantidade
+		FROM inv_contagem a , inv_endereco b, inv_item c
+		WHERE a.ende_id = b.ende_id	
+        AND c.item_id = b.item_id
+		AND a.inve_id = p_inve_id 
+        AND a.numeroContagem = p_numero_contagem
+		GROUP BY c.item_id;                            
+   -- Declare continue handler
+   DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done=1;   
+   -- Open the cursor
+   OPEN cursorContagem;
+   -- Loop through all rows
+   REPEAT
+      -- Get order number
+      FETCH cursorContagem INTO v_item_id, v_quantidade;
+        -- atualizar os totais das contagens realizadas
+        if p_numero_contagem = '1' then
+			UPDATE inv_item SET primeiraContagem = v_quantidade 
+			WHERE item_id = v_item_id;        
+		elseif p_numero_contagem = '2' then
+			UPDATE inv_item SET segundaContagem = v_quantidade 
+			WHERE item_id = v_item_id;           
+		elseif p_numero_contagem = '3' then
+			UPDATE inv_item SET terceiraContagem = v_quantidade 
+			WHERE item_id = v_item_id;        
+        end if;        
+        
+   -- End of loop
+   UNTIL done END REPEAT;
+   -- Close the cursor
+   CLOSE cursorContagem;   
+	-- atualiza a data fim da contagem
+	UPDATE inv_execucao SET fim = now() WHERE exec_id = p_exec_id;
+    if p_numero_contagem = '1' then
+		set v_numero_contagem = '2';
+    elseif p_numero_contagem = '2' then
+		set v_numero_contagem = '3';
+    elseif p_numero_contagem = '3' then
+		set v_numero_contagem = '4';
+    end if;
+    -- incrementa o status para a proxima contagem
+    UPDATE inv_inventario SET numeroContagem = v_numero_contagem WHERE inve_id = p_inve_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `importarItens` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `importarItens`(IN p_inve_id INT)
+BEGIN
+
+	-- DELETE FROM inv_endereco;
+    DELETE FROM inv_item WHERE inve_id = p_inve_id;
+    
+	-- importar os itens para tabela itens
+	insert into inv_item (codigo, nome, quantidadeSistema, 
+	quantidadeFisica, primeiraContagem, segundaContagem,
+	terceiraContagem, empr_cnpj, inve_id )
+	select distinct codigo, nome, quantidade as quantidadeSistema, 
+	0.00 as quantidadeFisica, 0.00 primeiraContagem, 0.00 segundaContagem,
+	0.00 terceiraContagem, null empr_cnpj, inve_id 
+	from inv_item_xls where inve_id =p_inve_id;
+    
+    -- importar os enderecos
+    insert into inv_endereco (descricao, item_id)
+    SELECT a.endereco, b.item_id 
+    FROM dbinventario.inv_item_xls a, dbinventario.inv_item b
+	where a.codigo = b.codigo 
+	and b.inve_id = p_inve_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `iniciarPrimeiraContagem` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `iniciarPrimeiraContagem`(
+												IN p_inve_id INT,
+                                                IN p_exec_id INT)
+BEGIN
+	DELETE FROM inv_contagem WHERE inve_id = p_inve_id;
+    
+	-- inseri os itens na contagens
+	INSERT INTO inv_contagem  (numeroContagem, status, quantidade, observacao, data, inve_id, ende_id)
+	SELECT '1' numeroContagem, '0' status, 0 quantidade, '' observacao, null data, b.inve_id, a.ende_id
+	FROM inv_endereco a 
+	INNER JOIN inv_item b on a.item_id = b.item_id
+	WHERE b.inve_id = p_inve_id;
+    
+    update inv_execucao set inicio = now() where exec_id = p_exec_id;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `iniciarSegundaContagem` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `iniciarSegundaContagem`(
+												IN p_inve_id INT,
+                                                IN p_exec_id INT)
+BEGIN
+	INSERT INTO inv_contagem  (numeroContagem, status, quantidade, observacao, data, inve_id, ende_id)
+	select '2' , '0' , 0 , '' , null, inve_id, ende_id
+	from (
+		SELECT b.item_id, quantidadeSistema, sum(a.quantidade) quantidadeContagem
+				, c.inve_id
+		FROM inv_contagem a 
+		inner join inv_endereco b on a.ende_id = b.ende_id
+		inner join inv_item c on c.item_id = b.item_id
+		where a.inve_id = p_inve_id
+        and a.numeroContagem = '1'
+		group by b.item_id, c.codigo, quantidadeSistema
+	) as itenDivergentes 
+	inner join inv_endereco f on itenDivergentes.item_id = f.item_id 
+	where quantidadeSistema <> quantidadeContagem;
+    -- seta a data fim da contagem
+    update inv_execucao set inicio = now() where exec_id = p_exec_id;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `iniciarTerceiraContagem` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `iniciarTerceiraContagem`(
+												IN p_inve_id INT,
+                                                IN p_exec_id INT)
+BEGIN
+	INSERT INTO inv_contagem  (numeroContagem, status, quantidade, observacao, data, inve_id, ende_id)
+	select '3' numeroContagem, '0' status, 0 quantidade, '' observacao, null data, inve_id, ende_id
+ 	from (
+    SELECT b.item_id, quantidadeSistema, c.primeiraContagem, c.segundaContagem,
+		sum(a.quantidade) quantidadeContagem
+				, c.inve_id
+		FROM inv_contagem a 
+		inner join inv_endereco b on a.ende_id = b.ende_id
+		inner join inv_item c on c.item_id = b.item_id
+		where a.inve_id = 15 -- p_inve_id
+        and a.numeroContagem = '2'
+        and c.quantidadeSistema <> c.segundaContagem
+        and c.segundaContagem <> c.primeiraContagem
+		group by b.item_id, quantidadeSistema, c.primeiraContagem, c.segundaContagem
+        ) as itenDivergentes 
+ 	inner join inv_endereco f on itenDivergentes.item_id = f.item_id 
+ 	where quantidadeSistema <> quantidadeContagem;
+    -- seta a data fim da contagem
+    update inv_execucao set inicio = now() where exec_id = p_exec_id;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -200,4 +460,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-15  7:59:28
+-- Dump completed on 2020-05-24  8:43:06
