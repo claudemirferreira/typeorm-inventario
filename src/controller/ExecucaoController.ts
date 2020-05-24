@@ -3,20 +3,14 @@ import { NextFunction, Request, Response } from "express";
 import { Execucao } from "../entity/execucao";
 import { Inventario } from "../entity/inventario";
 import { Contagem } from "../entity/contagem";
-import { Endereco } from "../entity/endereco";
-import { Item } from "../entity/item";
 
 export class ExecucaoController {
 
     private repository = getRepository(Execucao);
 
-    private repositoryItem = getRepository(Item);
-
     private repositoryInventario = getRepository(Inventario);
 
     private repositoryContagem = getRepository(Contagem);
-
-    private repositoryEndereco = getRepository(Endereco);
     
     private manager = getManager();     
 

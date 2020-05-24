@@ -30,7 +30,6 @@ export class ItemXlsController {
         itensXls.forEach(element => {
             element.inventario = inventario;
         });
-        console.log(JSON.stringify(itensXls));
         const list = await this.repository.save(request.body);
         console.log('iniciou a importacao item e endereco');
         var sql = 'CALL importarItens('+request.params.inventarioId+')';

@@ -7,7 +7,9 @@ export class InventarioController {
     private repository = getRepository(Inventario);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.repository.find();
+        return this.repository.createQueryBuilder("contagem")
+                .orderBy( "contagem.id", "DESC" )
+                .getMany();
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
