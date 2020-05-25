@@ -1,3 +1,4 @@
+import { UserController } from './controller/UserController';
 import {InventarioController} from "./controller/InventarioController";
 import { ContagemController } from "./controller/ContagemController";
 import { ItemController } from "./controller/ItemController";
@@ -7,6 +8,7 @@ import { ExecucaoController } from "./controller/ExecucaoController";
 import { EmpresaController } from "./controller/EmpresaController";
 
 export const Routes = [
+
     //inventario
     {
         method: "get",
@@ -226,5 +228,31 @@ export const Routes = [
         controller: EmpresaController,
         action: "find"
     }
+
+    //User
+    {
+        method: "get",
+        route: "/user/:id",
+        controller: UserController,
+        action: "one"
+    },
+    {
+        method: "post",
+        route: "/user/authentication",
+        controller: UserController,
+        action: "authentication"
+    },
+    {
+        method: "post",
+        route: "/user",
+        controller: UserController,
+        action: "save"
+    },
+    {
+        method: "delete",
+        route: "/user/:id",
+        controller: UserController,
+        action: "remove"
+    },
 
 ];
