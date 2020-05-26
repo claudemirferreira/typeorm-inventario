@@ -227,7 +227,7 @@ export const Routes = [
         route: "/empresa/find",
         controller: EmpresaController,
         action: "find"
-    }
+    },
 
     //User
     {

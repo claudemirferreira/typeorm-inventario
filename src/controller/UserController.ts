@@ -1,4 +1,4 @@
-import { compareSync, hashSync} from 'bcrypt';
+import { compareSync, hashSync} from 'bcryptjs';
 import {sign} from 'jsonwebtoken';
 import { getRepository } from 'typeorm';
 import { User } from './../entity/User';
