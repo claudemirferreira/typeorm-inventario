@@ -103,9 +103,15 @@ export const Routes = [
         route: "/item/:id",
         controller: ItemController,
         action: "remove"
+    },{
+        method: "get",
+        route: "/item/inventario/:inventarioId",
+        controller: ItemController,
+        action: "listByInventario"
     },
 
 
+    //listByInventario
     //endereco
     {
         method: "get",

@@ -204,6 +204,36 @@ INSERT INTO `inv_item_xls` VALUES (1,'ETIQUETA AUTO ADESIVA 39X11MM','306181','P
 UNLOCK TABLES;
 
 --
+-- Table structure for table `inv_user`
+--
+
+DROP TABLE IF EXISTS `inv_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `inv_user` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(200) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `empr_cnpj` varchar(14) DEFAULT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `FK_560fbebcca672ce7717048f264f` (`empr_cnpj`),
+  CONSTRAINT `FK_560fbebcca672ce7717048f264f` FOREIGN KEY (`empr_cnpj`) REFERENCES `saa_empresa` (`empr_cnpj`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inv_user`
+--
+
+LOCK TABLES `inv_user` WRITE;
+/*!40000 ALTER TABLE `inv_user` DISABLE KEYS */;
+INSERT INTO `inv_user` VALUES (1,'nelsonsozinho','nelsonsozinho','nelsonsozinho',1,'12345678901234');
+/*!40000 ALTER TABLE `inv_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `saa_empresa`
 --
 
@@ -226,6 +256,7 @@ CREATE TABLE `saa_empresa` (
 
 LOCK TABLES `saa_empresa` WRITE;
 /*!40000 ALTER TABLE `saa_empresa` DISABLE KEYS */;
+INSERT INTO `saa_empresa` VALUES ('12345678901234','7Bit Sistema','claudemirramosferreira@gmail.com','rua 1','999999999');
 /*!40000 ALTER TABLE `saa_empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -460,4 +491,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-27  7:21:55
+-- Dump completed on 2020-05-27 10:20:53

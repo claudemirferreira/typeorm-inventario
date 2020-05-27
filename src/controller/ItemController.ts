@@ -1,8 +1,6 @@
 import { getRepository } from "typeorm";
 import { NextFunction, Request, Response } from "express";
 import { Item } from "../entity/item";
-import { Inventario } from "../entity/inventario";
-import { Endereco } from "../entity/endereco";
 
 export class ItemController {
 
@@ -23,6 +21,13 @@ export class ItemController {
     async remove(request: Request, response: Response, next: NextFunction) {
         let userToRemove = await this.repository.findOne(request.params.id);
         await this.repository.remove(userToRemove);
+    }
+
+    async listByInventario(request: Request, response: Response, next: NextFunction) {
+        return await this.repository.createQueryBuilder("item")
+            .innerJoin("item.inventario", "inventario")
+            .where("inventario.id = :id", { id: request.params.inventarioId })
+            .getMany();
     }
 
 

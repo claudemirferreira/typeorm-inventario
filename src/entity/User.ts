@@ -1,5 +1,6 @@
 
-import { Entity, Column, OneToMany, JoinColumn, Index, PrimaryGeneratedColumn, PrimaryColumn } from "typeorm";
+import { Entity, Column, OneToMany, JoinColumn, Index, PrimaryGeneratedColumn, PrimaryColumn, ManyToOne } from "typeorm";
+import { Empresa } from "./Empresa";
 
 @Entity({name:"inv_user"})
 export class User {
@@ -18,5 +19,9 @@ export class User {
 
     @Column({nullable: false, default: true})
     active: Boolean;
+
+    @ManyToOne(type => Empresa, empresa => empresa.users)
+    @JoinColumn({ name: "empr_cnpj" })
+    empresa: Empresa;
     
 }

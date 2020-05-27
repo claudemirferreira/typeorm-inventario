@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryColumn, OneToMany, JoinColumn } from "typeorm";
 import { Item } from "./item";
 import { Inventario } from "./inventario";
+import { User } from "./User";
 
 @Entity({ name: "saa_empresa" })
 export class Empresa {
@@ -27,5 +28,8 @@ export class Empresa {
     @OneToMany(type => Inventario, inventario => inventario.empresa)
     @JoinColumn({ name: "inve_id" })
     inventarios: Inventario[];
+
+    @OneToMany(type => User, user => user.empresa)
+    users: User[];
 
 }
