@@ -1,4 +1,6 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `iniciarPrimeiraContagem`(IN p_inve_id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `iniciarPrimeiraContagem`(
+												IN p_inve_id INT,
+                                                IN p_exec_id INT)
 BEGIN
 	DELETE FROM inv_contagem WHERE inve_id = p_inve_id;
     
@@ -8,5 +10,7 @@ BEGIN
 	FROM inv_endereco a 
 	INNER JOIN inv_item b on a.item_id = b.item_id
 	WHERE b.inve_id = p_inve_id;
+    
+    update inv_execucao set inicio = now() where exec_id = p_exec_id;
 
 END

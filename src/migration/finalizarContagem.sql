@@ -43,9 +43,11 @@ BEGIN
 	-- atualiza a data fim da contagem
 	UPDATE inv_execucao SET fim = now() WHERE exec_id = p_exec_id;
     if p_numero_contagem = '1' then
-		  set v_numero_contagem = '2';
+		set v_numero_contagem = '2';
     elseif p_numero_contagem = '2' then
-		  set v_numero_contagem = '3';
+		set v_numero_contagem = '3';
+    elseif p_numero_contagem = '3' then
+		set v_numero_contagem = '4';
     end if;
     -- incrementa o status para a proxima contagem
     UPDATE inv_inventario SET numeroContagem = v_numero_contagem WHERE inve_id = p_inve_id;

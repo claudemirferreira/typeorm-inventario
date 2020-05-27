@@ -19,6 +19,4 @@ BEGIN
     FROM dbinventario.inv_item_xls a, dbinventario.inv_item b
 	where a.codigo = b.codigo 
 	and b.inve_id = p_inve_id;
-    
-    
 END
