@@ -1,3 +1,5 @@
+import { PageWrapper } from './../wrapper/page-wrapper';
+import { FilterQuery } from './../filter/filter-request';
 import { compareSync, hashSync} from 'bcryptjs';
 import {sign} from 'jsonwebtoken';
 import { getRepository } from 'typeorm';
@@ -7,6 +9,27 @@ import { NextFunction, Request, Response } from "express";
 export class UserController {
     
     private repository = getRepository(User);
+
+    async all(request: Request, response: Response, next: NextFunction) {           
+        const filter: FilterQuery = new FilterQuery(request.query);
+        const wrapper = new PageWrapper<User>();
+
+        const result = await this.repository.createQueryBuilder('user')
+            .where('user.active = :active', {'active': filter.is_active})
+            .orderBy(filter.ordering)
+            .skip(filter.limit*(filter.page))
+            .take(filter.limit)
+            .getMany();        
+        
+        const count = await this.repository.createQueryBuilder("user").select(" COUNT(*) ", "sum").getRawOne(); 
+
+        wrapper.results = result;
+        wrapper.count = parseInt(count['sum']);
+        wrapper.next = wrapper.nextPage(filter.page);
+        wrapper.previous = wrapper.previusPage(filter.page);
+
+        return wrapper;        
+    }
 
     async one(request: Request, response: Response, next: NextFunction) {
         return this.repository.findOne(request.params.id);
