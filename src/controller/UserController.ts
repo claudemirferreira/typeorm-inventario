@@ -41,6 +41,18 @@ export class UserController {
         return this.repository.save(request.body);
     }
 
+    async update(request: Request, response: Response, next: NextFunction) {
+        const id = request.params.id;
+        const password = await hashSync(request.body.password, 10);
+        
+        const user = await this.repository.createQueryBuilder("user")
+        .where("user.codigo = :id", {id: id})
+        .getOne();
+
+        user.password = password;
+        return this.repository.save(user);
+    }
+
     async remove(request: Request, response: Response, next: NextFunction) {
         let user = await this.repository.findOne(request.params.id);
         const result = await this.repository.delete(request.params.id);
