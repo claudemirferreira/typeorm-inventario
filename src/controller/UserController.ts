@@ -13,19 +13,31 @@ export class UserController {
     async all(request: Request, response: Response, next: NextFunction) {           
         const filter: FilterQuery = new FilterQuery(request.query);
         const wrapper = new PageWrapper<User>();
+        var result = null;
 
-        const result = await this.repository.createQueryBuilder('user')
-            .where('user.active = :active', {'active': filter.is_active})
-            .orderBy(filter.ordering)
-            .skip(filter.limit*(filter.page))
-            .take(filter.limit)
-            .getMany();        
+        if(!filter.name) {
+            result = await this.repository.createQueryBuilder('user')
+                .where('user.active = :active', {'active': filter.is_active})
+                .orderBy(filter.ordering)
+                .skip(filter.limit*(filter.page))
+                .take(filter.limit)
+                .getMany();
+        } else {
+            result = await this.repository.createQueryBuilder('user')
+                .where('user.active = :active', {'active': filter.is_active})
+                .andWhere('user.nome like :name', {'name': '%'+filter.name+'%'})
+                .orderBy(filter.ordering)
+                .skip(filter.limit*(filter.page))
+                .take(filter.limit)
+                .getMany();
+        }
         
         const count = await this.repository.createQueryBuilder("user").select(" COUNT(*) ", "sum").getRawOne(); 
+        const hasNextPage = ((filter.page + 1) * filter.limit) <= count['sum'] ? true : false;
 
         wrapper.results = result;
         wrapper.count = parseInt(count['sum']);
-        wrapper.next = wrapper.nextPage(filter.page);
+        wrapper.next = hasNextPage ? wrapper.nextPage(filter.page) : -1;
         wrapper.previous = wrapper.previusPage(filter.page);
 
         return wrapper;        

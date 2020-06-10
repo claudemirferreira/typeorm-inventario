@@ -5,6 +5,7 @@ export class FilterQuery {
     ordering: string;
     is_active: boolean = true;
     fields: string;
+    name: string;
 
     constructor(query: any) {
         this.limit = query.limit ? parseInt(query.limit) : this.limit;
@@ -12,6 +13,7 @@ export class FilterQuery {
         this.ordering = query.ordering;
         this.is_active = query.is_active ? query.is_active: this.is_active;
         this.fields = query.fields;
+        this.name = query.name;
     }
 
     private pageValidation(page: number):number {
