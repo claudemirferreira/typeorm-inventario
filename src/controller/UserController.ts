@@ -14,25 +14,31 @@ export class UserController {
         const filter: FilterQuery = new FilterQuery(request.query);
         const wrapper = new PageWrapper<User>();
         var result = null;
-
-        if(!filter.name) {
+        var count = null;
+        
+        if(filter.name || filter.login) {
             result = await this.repository.createQueryBuilder('user')
                 .where('user.active = :active', {'active': filter.is_active})
+                .andWhere('user.nome or user.username like :name', {'name': '%'+filter.name+'%'})
                 .orderBy(filter.ordering)
                 .skip(filter.limit*(filter.page))
                 .take(filter.limit)
                 .getMany();
+            count = await this.repository.createQueryBuilder("user")
+                .select(" COUNT(*) ", "sum")
+                .andWhere('user.nome like :name', {'name': '%'+filter.name+'%'})
+                .getRawOne();
         } else {
             result = await this.repository.createQueryBuilder('user')
                 .where('user.active = :active', {'active': filter.is_active})
-                .andWhere('user.nome like :name', {'name': '%'+filter.name+'%'})
                 .orderBy(filter.ordering)
                 .skip(filter.limit*(filter.page))
                 .take(filter.limit)
                 .getMany();
+            
+            count = await this.repository.createQueryBuilder("user").select(" COUNT(*) ", "sum").getRawOne();
         }
         
-        const count = await this.repository.createQueryBuilder("user").select(" COUNT(*) ", "sum").getRawOne(); 
         const hasNextPage = ((filter.page + 1) * filter.limit) <= count['sum'] ? true : false;
 
         wrapper.results = result;
@@ -50,7 +56,16 @@ export class UserController {
     async save(request: Request, response: Response, next: NextFunction) {
         const password = await hashSync(request.body.password, 10);
         request.body.password = password;
-        return this.repository.save(request.body);
+
+        const user = await this.repository.createQueryBuilder("user")
+        .where("user.username = :username", {username: request.body.username})
+        .getOne();
+
+        if(!user) {
+            return this.repository.save(request.body);
+        }
+
+        response.status(400).json({error: "User with username " + request.body.username + " already exist"});
     }
 
     async update(request: Request, response: Response, next: NextFunction) {
