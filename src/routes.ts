@@ -271,11 +271,7 @@ export const Routes = [
         controller: UserController,
         action: "update"
     },
-<<<<<<< HEAD
-=======
 
-    //Perfil
->>>>>>> d2ba92a054a8c54e0d986074e753e9c5fbca7cf9
     {
         method: "get",
         route: "/perfil/find-perfil",
