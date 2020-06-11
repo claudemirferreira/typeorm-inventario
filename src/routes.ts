@@ -7,7 +7,6 @@ import { EnderecoController } from "./controller/EnderecoController";
 import { ExecucaoController } from "./controller/ExecucaoController";
 import { EmpresaController } from "./controller/EmpresaController";
 import { PerfilController } from "./controller/PerfilController";
-import { PerfilRotinaController } from "./controller/PerfilRotinaController";
 
 
 export const Routes = [
@@ -273,11 +272,7 @@ export const Routes = [
         route: "/user/:id",
         controller: UserController,
         action: "update"
-    }
-
-
-
-    //Perfil
+    },
     {
         method: "get",
         route: "/perfil/find-perfil",
