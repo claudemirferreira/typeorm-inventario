@@ -268,7 +268,12 @@ export const Routes = [
         route: "/user/:id",
         controller: UserController,
         action: "remove"
-    },
+    }, {
+        method: "put",
+        route: "/user/:id",
+        controller: UserController,
+        action: "update"
+    }
 
 
 
