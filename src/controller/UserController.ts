@@ -65,7 +65,7 @@ export class UserController {
             return this.repository.save(request.body);
         }
 
-        response.status(400).json({error: "User with username " + request.body.username + " already exist"});
+        response.status(400).json({message: "Usuário com o login " + request.body.username + " já existe"});
     }
 
     async update(request: Request, response: Response, next: NextFunction) {
