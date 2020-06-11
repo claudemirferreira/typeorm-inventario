@@ -68,7 +68,7 @@ export class UserController {
             .getOne();
 
         if(!user) {
-            response.status(400).json({error: "User or password invalid !"});
+            response.status(400).json({error: "login e senha invalidos !"});
         }
 
         if(!user.active) {
@@ -76,7 +76,7 @@ export class UserController {
         }
 
         if(!(await compareSync(password, user.password))) {
-            response.status(400).json({error: "User or password invalid !"});
+            response.status(400).json({error: "login e senha invalidos !"});
         }
         
         var json = JSON.stringify({
