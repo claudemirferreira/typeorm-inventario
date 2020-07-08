@@ -1,3 +1,2 @@
 npm install -g ts-node
-server: npm install -g ts-node
 server: ng start
