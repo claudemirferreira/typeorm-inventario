@@ -22,5 +22,8 @@
    },
    "scripts": {
       "start": "ts-node src/index.ts"
+   },
+   "engines": {
+      "node": "13.x"
    }
 }
