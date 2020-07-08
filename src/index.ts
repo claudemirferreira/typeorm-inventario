@@ -5,9 +5,10 @@ import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
 
+
 createConnection().then(async connection => {
 
-    // create express app
+    // create express appconne
     const app = express();
     const middleware = require("../src/middleware/auth")
     var cors = require('cors');

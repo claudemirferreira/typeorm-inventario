@@ -1,9 +1,9 @@
 {
    "type": "mysql",
-   "host": "mysql-inventario",
+   "host": "us-cdbr-east-02.cleardb.com",
    "port": 3306,
-   "username": "root",
-   "password": "root",
+   "username": "b179230d7fa787",
+   "password": "bc5906ef",
    "database": "dbinventario",
    "synchronize": true,
    "logging": false,
