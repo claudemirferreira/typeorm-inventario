@@ -1,0 +1,1 @@
+server: ts-node src/index.ts
