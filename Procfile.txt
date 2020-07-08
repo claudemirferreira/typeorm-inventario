@@ -1,1 +1,3 @@
+server: npm install -g typescript
+server: npm install -g ts-node
 server: ts-node src/index.ts
