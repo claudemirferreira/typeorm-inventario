@@ -26,7 +26,7 @@ export class ItemXlsController {
         console.log('iniciou a importacao item-xls');
         var itensXls = request.body;
         var inventario = new Inventario();
-        inventario.id = request.params.inventarioId;
+        inventario.id = Number(request.params.inventarioId);
         itensXls.forEach(element => {
             element.inventario = inventario;
         });
