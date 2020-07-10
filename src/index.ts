@@ -39,7 +39,7 @@ createConnection().then(async connection => {
     // ...
 
     // start express server
-    app.listen(8080);
+    app.listen(process.env.PORT);
 
     // insert new users for test
     /* 
