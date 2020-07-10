@@ -39,7 +39,8 @@ createConnection().then(async connection => {
     // ...
 
     // start express server
-    app.listen(process.env.PORT);
+    var port = process.env.PORT || 3000;
+    app.listen(port);
 
     // insert new users for test
     /* 
@@ -50,6 +51,6 @@ createConnection().then(async connection => {
     }));
     */  
     
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
+    console.log("Express server has started on port " + port + ". Open http://localhost:"+port+"/users to see results");
 
 }).catch(error => console.log(error));
