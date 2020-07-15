@@ -279,4 +279,11 @@ export const Routes = [
         action: "findPerfil"
     },
 
+    {
+        method: "get",
+        route: "/perfil/find-user-perfis",
+        controller: PerfilController,
+        action: "findPerfilByLoggedUser"
+    }
+
 ];

@@ -1,9 +1,12 @@
+import { User } from './User';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 
 
@@ -21,5 +24,9 @@ export class Perfil {
   @OneToMany(type => PerfilRotina, perfilRotina => perfilRotina.perfil)
   @JoinColumn({ name: "perf_id" })
   perfilRotinas: PerfilRotina[];
+
+  @ManyToMany(type => User, user => user.perfis)
+  @JoinTable()
+  users: User[];
   
 }
