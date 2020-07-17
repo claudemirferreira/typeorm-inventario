@@ -1,20 +1,26 @@
+import { EmpresaFilterQuery } from './../filter/empresa-filter-request';
 
 import { getRepository, Like } from 'typeorm';
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response, query } from "express";
 import { Empresa } from '../entity/Empresa';
 
 export class EmpresaController {
     
     private repository = getRepository(Empresa);
 
-    async find(request: Request, response: Response, next: NextFunction) {
-        var sql = "SELECT * FROM saa_empresa where cnpj like '"+ request.body.cnpj +"%' or nome like '" + request.body.nome + "%'";
-        console.log(sql);
-        return await this.repository.query(sql);
-    }
-
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.repository.find();
+        var filter:EmpresaFilterQuery = new EmpresaFilterQuery(request.query);
+        
+        
+        let query = this.repository.createQueryBuilder("empresa");
+        
+        if(filter.cnpj) {
+            query = query.andWhere("empresa.cnpj like :cnpj", {cnpj: filter.cnpj+'%'})
+        } else if(filter.nome) {
+            query = query.andWhere("empresa.nome like :nome", {nome: '%'+filter.nome+'%'})
+        } 
+        
+        return query.getMany();
     }
 
     async one(request: Request, response: Response, next: NextFunction) {

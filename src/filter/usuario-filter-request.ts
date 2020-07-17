@@ -1,5 +1,5 @@
-import { PageWrapper } from './../wrapper/page-wrapper';
-export class FilterQuery {
+import { PageWrapper } from '../wrapper/page-wrapper';
+export class UsuarioFilterQuery {
     limit:number = 10;
     page:number = 0;
     ordering: string;

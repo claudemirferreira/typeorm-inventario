@@ -1,5 +1,5 @@
 import { PageWrapper } from './../wrapper/page-wrapper';
-import { FilterQuery } from './../filter/filter-request';
+import { FilterQuery } from '../filter/usuario-filter-request';
 import { compareSync, hashSync} from 'bcryptjs';
 import {sign} from 'jsonwebtoken';
 import { getRepository } from 'typeorm';

@@ -214,11 +214,6 @@ export const Routes = [
         controller: EmpresaController,
         action: "all"
     }, {
-        method: "get",
-        route: "/empresa/:cnpj",
-        controller: EmpresaController,
-        action: "one"
-    }, {
         method: "post",
         route: "/empresa",
         controller: EmpresaController,
@@ -228,11 +223,6 @@ export const Routes = [
         route: "/empresa/:cnpj",
         controller: EmpresaController,
         action: "remove"
-    }, {
-        method: "post",
-        route: "/empresa/find",
-        controller: EmpresaController,
-        action: "find"
     },
 
     //User
