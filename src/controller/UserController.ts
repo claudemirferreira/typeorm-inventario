@@ -1,5 +1,5 @@
 import { PageWrapper } from './../wrapper/page-wrapper';
-import { FilterQuery } from '../filter/usuario-filter-request';
+import { UsuarioFilterQuery } from '../filter/usuario-filter-request';
 import { compareSync, hashSync} from 'bcryptjs';
 import {sign} from 'jsonwebtoken';
 import { getRepository } from 'typeorm';
@@ -11,7 +11,7 @@ export class UserController {
     private repository = getRepository(User);
 
     async all(request: Request, response: Response, next: NextFunction) {           
-        const filter: FilterQuery = new FilterQuery(request.query);
+        const filter: UsuarioFilterQuery = new UsuarioFilterQuery(request.query);
         const wrapper = new PageWrapper<User>();
         var result = null;
         var count = null;

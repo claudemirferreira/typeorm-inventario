@@ -210,7 +210,7 @@ export const Routes = [
     //inventario
     {
         method: "get",
-        route: "/empresa",
+        route: "/empresa/find",
         controller: EmpresaController,
         action: "all"
     }, {
@@ -218,6 +218,16 @@ export const Routes = [
         route: "/empresa",
         controller: EmpresaController,
         action: "save"
+    }, {
+        method: "put",
+        route: "/empresa",
+        controller: EmpresaController,
+        action: "update"
+    }, {
+        method: "get",
+        route: "/empresa/:cnpj",
+        controller: EmpresaController,
+        action: "one"
     }, {
         method: "delete",
         route: "/empresa/:cnpj",
