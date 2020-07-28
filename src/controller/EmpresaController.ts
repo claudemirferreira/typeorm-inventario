@@ -1,13 +1,13 @@
+import { NextFunction, Request, Response } from "express";
+import { getRepository } from 'typeorm';
+import { Empresa } from '../entity/Empresa';
 import { EmpresaFilterQuery } from './../filter/empresa-filter-request';
 
-import { getRepository, Like } from 'typeorm';
-import { NextFunction, Request, Response, query } from "express";
-import { Empresa } from '../entity/Empresa';
 
 export class EmpresaController {
     
     private repository = getRepository(Empresa);
-
+    
     async all(request: Request, response: Response, next: NextFunction) {
         var filter:EmpresaFilterQuery = new EmpresaFilterQuery(request.query);
         
@@ -30,7 +30,7 @@ export class EmpresaController {
         let empresa = await this.repository.createQueryBuilder("empresa")
             .andWhere("empresa.cnpj = :cnpj", {cnpj: request.body.cnpj})
             .getOne();
-        
+
         if(!empresa) {
             return this.repository.save(request.body);
         }

@@ -7,7 +7,7 @@ import { Empresa } from "./Empresa";
 export class User {
 
     @PrimaryGeneratedColumn()
-    codigo: String;
+    codigo: number;
 
     @Column({length: 200, nullable: false})
     nome: String;
@@ -22,10 +22,9 @@ export class User {
     active: Boolean;
 
     @ManyToOne(type => Empresa, empresa => empresa.users)
-    @JoinColumn({ name: "empr_cnpj" })
     empresa: Empresa;
 
-    @ManyToMany(type => Perfil, perfil => perfil.users)
+    @ManyToMany(type => Perfil, {cascade: true})
     @JoinTable()
     perfis: Perfil[]
     
