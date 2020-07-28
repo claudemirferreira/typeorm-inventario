@@ -97,6 +97,8 @@ export class UserController {
             .where("user.codigo = :id", {id: id})
             .getOne();
 
+        user.empresa = request.body.empresa;
+
         if(!user) {
             response.status(404).json({message: "Usuário com ID " + id + " não foi encontrado"});
         }
